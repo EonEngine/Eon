@@ -9,8 +9,8 @@ include_directories(${SDL2_INCLUDE_DIR} Eon/Include)
 add_library(Eon 
   Eon/Source/Entity/Entity.cpp
   Eon/Source/Entity/Component.cpp
-  Eon/Source/Renderer/Renderer.cpp 
-  Eon/Source/Renderer/SDL.cpp)
+  Eon/Source/Game.cpp
+  Eon/Source/Renderer/Renderer.cpp)
 
 add_executable(Sandbox Sandbox/Main.cpp)
 
