@@ -4,14 +4,18 @@ project(Eon)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 find_package(SDL2 REQUIRED)
+find_package(OpenGL REQUIRED)
 
-include_directories(${SDL2_INCLUDE_DIR} Eon/Include)
-add_library(Eon 
+include_directories(${SDL2_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR} Eon/Include)
+add_library(Eon
   Eon/Source/Entity/Entity.cpp
   Eon/Source/Entity/Component.cpp
   Eon/Source/Game.cpp
+  Eon/Source/Math/Vec3.cpp
+  Eon/Source/Renderer/Color.cpp
+  Eon/Source/Renderer/Mesh.cpp
   Eon/Source/Renderer/Renderer.cpp)
 
 add_executable(Sandbox Sandbox/Main.cpp)
 
-target_link_libraries(Sandbox Eon ${SDL2_LIBRARY})
+target_link_libraries(Sandbox Eon ${SDL2_LIBRARY} ${OPENGL_LIBRARIES})
