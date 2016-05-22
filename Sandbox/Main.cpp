@@ -51,9 +51,12 @@ int main() {
   entity.AddComponent(component);
   entity.RemoveComponent(component);
 
-  game.Start();
+  int result = game.Start();
 
-  std::cout << "Eon exited normally";
-
+  if (result != 0) {
+    std::cout << "Eon was stopped due to an internal error";
+  } else {
+    std::cout << "Eon exited normally";
+  }
   return 0;
 }

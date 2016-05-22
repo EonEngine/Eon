@@ -32,7 +32,9 @@ private:
 
   std::vector<Mesh *> meshes;
 
-  std::vector<GLuint> vaos;
+  // std::vector<GLuint> vaos;
+
+  GLint currentShader;
 };
 }
 }

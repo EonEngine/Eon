@@ -6,8 +6,6 @@
 namespace eon {
 namespace graphics {
 
-GLuint VAO;
-
 Renderer::Renderer(const char *name, int width, int height)
     : bgColor(0, 0, 0, 1) {
   if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -39,16 +37,22 @@ void Renderer::Render() {
   glClearColor(bgColor.red, bgColor.green, bgColor.blue, bgColor.alpha);
   glClear(GL_COLOR_BUFFER_BIT);
 
+  GLfloat greenValue = (sin(SDL_GetTicks() / 5) / 2) + 0.5;
+  GLint colorLocation = glGetUniformLocation(currentShader, "vColor");
+  glUniform4f(colorLocation, 0.0f, greenValue, 0.0f, 1.0f);
+
   for (int i = 0; i < meshes.size(); i++) {
     GLfloat verts[9];
     meshes[i]->GetGL(verts, 9);
 
-    glGenVertexArrays(1, &VAO);
-    glBindVertexArray(VAO);
+    GLuint vao;
 
-    GLuint VBO;
-    glGenBuffers(1, &VBO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
+
+    GLuint vbo;
+    glGenBuffers(1, &vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glBufferData(GL_ARRAY_BUFFER, sizeof(verts), verts, GL_STATIC_DRAW);
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat),
@@ -79,6 +83,9 @@ void Renderer::SetBackgroundColor(Color color) { bgColor = color; }
 
 Color Renderer::GetBackgroundColor() { return bgColor; }
 
-void Renderer::SetShader(Shader shader) { glUseProgram(shader.GetID()); }
+void Renderer::SetShader(Shader shader) {
+  glUseProgram(shader.GetID());
+  currentShader = shader.GetID();
+}
 }
 }

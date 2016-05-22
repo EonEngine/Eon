@@ -1,27 +1,26 @@
 #include <SDL.h>
+#include <stdlib.h>
 
 #include "Eon.h"
 #include "Game.h"
 
 namespace eon {
 Game::Game(graphics::Renderer *gameRenderer) { renderer = gameRenderer; }
-void Game::Start() {
+int Game::Start() {
   SDL_Event event;
-  while (SDL_WaitEvent(&event) >= 0) {
-    switch (event.type) {
-    case SDL_QUIT: {
-      return;
-    }
+  while (true) {
+    timer.Reset();
+    while (SDL_PollEvent(&event)) {
 
-    case SDL_KEYDOWN: {
-      // Q key = Quit
-      if (event.key.keysym.sym) {
-        return;
+      switch (event.type) {
+      case SDL_QUIT: {
+        return 0;
+      }
       }
     }
-    }
-
     renderer->Render();
+    std::cout << "Ticks: " << timer.GetTicks() << ", MS: " << timer.GetMs()
+              << std::endl;
   }
 }
 }
