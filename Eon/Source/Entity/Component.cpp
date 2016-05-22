@@ -1,7 +1,2 @@
-#include "Eon.hpp"
-#include "Entity/Component.hpp"
-
-Component::Component()
-{
-
-}
+#include "Entity/Component.h"
+#include "Eon.h"

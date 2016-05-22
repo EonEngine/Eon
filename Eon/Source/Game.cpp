@@ -1,26 +1,27 @@
 #include <SDL.h>
 
-#include "Eon.hpp"
-#include "Game.hpp"
+#include "Eon.h"
+#include "Game.h"
 
-Game::Game(Renderer* gameRenderer)
-{
-    renderer = gameRenderer;
-}
-
-void Game::Start()
-{
-    SDL_Event event;
-    while(SDL_WaitEvent(&event) >= 0)
-    {
-        switch(event.type)
-        {
-            case SDL_QUIT:
-            {
-                return;
-            }
-        }
-
-        renderer->Render();
+namespace eon {
+Game::Game(graphics::Renderer *gameRenderer) { renderer = gameRenderer; }
+void Game::Start() {
+  SDL_Event event;
+  while (SDL_WaitEvent(&event) >= 0) {
+    switch (event.type) {
+    case SDL_QUIT: {
+      return;
     }
+
+    case SDL_KEYDOWN: {
+      // Q key = Quit
+      if (event.key.keysym.sym) {
+        return;
+      }
+    }
+    }
+
+    renderer->Render();
+  }
+}
 }

@@ -1,40 +1,59 @@
 #include <iostream>
 #include <vector>
 
-#include <Eon.hpp>
-#include <Entity/Entity.hpp>
-#include <Entity/Component.hpp>
-#include <Math/Vec3.hpp>
-#include <Renderer/Color.hpp>
-#include <Renderer/Renderer.hpp>
-#include <Renderer/Mesh.hpp>
+#include <Eon.h>
+
+#include <Assets.h>
+#include <Entity/Component.h>
+#include <Entity/Entity.h>
+#include <Graphics/Color.h>
+#include <Graphics/Mesh.h>
+#include <Graphics/Renderer.h>
+#include <Math/Vec3.h>
+
+using namespace eon;
+using namespace eon::entity;
+using namespace eon::graphics;
+using namespace eon::math;
 
 int main() {
-    std::cout << "Eon v" << EON_VERSION << " Sandbox" << std::endl;
+  std::cout << "Eon v" << EON_VERSION << " Sandbox" << std::endl;
 
-    Renderer renderer("Eon Sandbox", 1336, 768);
-    Game game(&renderer);
-    renderer.SetBackgroundColor(Color(0.1, 0.1, 0.1, 1));
+  Renderer renderer("Eon Sandbox", 1336, 768);
+  Game game(&renderer);
+  renderer.SetBackgroundColor(Color(0.1, 0.1, 0.1, 1));
 
-    Mesh triangle;
-    triangle.AddVertex(Vec3(-0.5, -0.5, 0));
-    triangle.AddVertex(Vec3(0.5, -0.5, 0));
-    triangle.AddVertex(Vec3(0, 0.5, 0));
+  Mesh triangle0;
+  triangle0.AddVertex(Vec3(0.5, 0.5, 0));
+  triangle0.AddVertex(Vec3(0.5, -0.5, 0));
+  triangle0.AddVertex(Vec3(-0.5, 0.5, 0));
 
-    Mesh shape;
-    shape.AddVertex(Vec3(-0.9, -0.9, 0));
-    shape.AddVertex(Vec3(0.1, -0.9, 0));
-    shape.AddVertex(Vec3(0, 0.1, 0));
+  Mesh triangle1;
+  triangle1.AddVertex(Vec3(0.5, -0.5, 0));
+  triangle1.AddVertex(Vec3(-0.5, -0.5, 0));
+  triangle1.AddVertex(Vec3(-0.5, 0.5, 0));
 
-    renderer.AddMesh(&shape);
-    renderer.AddMesh(&triangle);
+  renderer.AddMesh(&triangle0);
+  renderer.AddMesh(&triangle1);
 
-    Entity entity;
-    Component* component;
-    entity.AddComponent(component);
-    entity.RemoveComponent(component);
+  VertexShader vert(LoadAsset("Vertex.glsl").c_str());
+  FragmentShader frag(LoadAsset("Fragment.glsl").c_str());
 
-    game.Start();
+  Shader shader(vert, frag);
 
-    return 0;
+  glDeleteShader(vert.GetID());
+  glDeleteShader(vert.GetID());
+
+  renderer.SetShader(shader);
+
+  Entity entity;
+  Component *component;
+  entity.AddComponent(component);
+  entity.RemoveComponent(component);
+
+  game.Start();
+
+  std::cout << "Eon exited normally";
+
+  return 0;
 }
