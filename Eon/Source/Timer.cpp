@@ -22,6 +22,6 @@ int Timer::GetTicks() {
 }
 float Timer::GetMs() {
   float ticks = (float)GetTicks();
-  return ticks / CLOCKS_PER_SEC;
+  return (ticks / CLOCKS_PER_SEC) * 1000;
 }
 }

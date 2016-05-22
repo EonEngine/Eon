@@ -4,20 +4,25 @@
 #include <vector>
 
 #include "Common.h"
-#include "Math/Vec3.h"
+#include "Graphics/Triangle.h"
 
 namespace eon {
 namespace graphics {
-using namespace math;
 class Mesh {
 public:
-  int AddVertex(Vec3 pos);
-  void RemoveVertex(int index);
+  int AddTriangle(Triangle triangle);
+  void RemoveTriangle(int index);
 
-  void GetGL(GLfloat array[], int size);
+  void Render();
+
+  void GenerateVertexArray();
+
+  void GetGL(std::vector<GLfloat> *array, int size);
 
 private:
-  std::vector<Vec3> vertices;
+  std::vector<Triangle> triangles;
+
+  GLuint id;
 };
 }
 }

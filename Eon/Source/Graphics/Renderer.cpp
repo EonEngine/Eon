@@ -37,32 +37,12 @@ void Renderer::Render() {
   glClearColor(bgColor.red, bgColor.green, bgColor.blue, bgColor.alpha);
   glClear(GL_COLOR_BUFFER_BIT);
 
-  GLfloat greenValue = (sin(SDL_GetTicks() / 5) / 2) + 0.5;
+  GLfloat greenValue = (sin((float)SDL_GetTicks() / 700) / 2) + 0.5;
   GLint colorLocation = glGetUniformLocation(currentShader, "vColor");
   glUniform4f(colorLocation, 0.0f, greenValue, 0.0f, 1.0f);
 
   for (int i = 0; i < meshes.size(); i++) {
-    GLfloat verts[9];
-    meshes[i]->GetGL(verts, 9);
-
-    GLuint vao;
-
-    glGenVertexArrays(1, &vao);
-    glBindVertexArray(vao);
-
-    GLuint vbo;
-    glGenBuffers(1, &vbo);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(verts), verts, GL_STATIC_DRAW);
-
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat),
-                          (GLvoid *)0);
-    glEnableVertexAttribArray(0);
-
-    glDrawArrays(GL_TRIANGLES, 0, 3);
-    glBindVertexArray(0);
-
-    glBindVertexArray(0);
+    meshes[i]->Render();
   }
 
   SDL_GL_SwapWindow(window);

@@ -23,33 +23,24 @@ int main() {
   Game game(&renderer);
   renderer.SetBackgroundColor(Color(0.1, 0.1, 0.1, 1));
 
-  Mesh triangle0;
-  triangle0.AddVertex(Vec3(0.5, 0.5, 0));
-  triangle0.AddVertex(Vec3(0.5, -0.5, 0));
-  triangle0.AddVertex(Vec3(-0.5, 0.5, 0));
+  Triangle triangle0(Vec3(0.5, 0.5, 0), Vec3(0.5, -0.5, 0), Vec3(-0.5, 0.5, 0));
+  Triangle triangle1(Vec3(0.5, -0.5, 0), Vec3(-0.5, -0.5, 0),
+                     Vec3(-0.5, 0.5, 0));
 
-  Mesh triangle1;
-  triangle1.AddVertex(Vec3(0.5, -0.5, 0));
-  triangle1.AddVertex(Vec3(-0.5, -0.5, 0));
-  triangle1.AddVertex(Vec3(-0.5, 0.5, 0));
+  Mesh mesh0;
+  mesh0.AddTriangle(triangle0);
+  mesh0.AddTriangle(triangle1);
 
-  renderer.AddMesh(&triangle0);
-  renderer.AddMesh(&triangle1);
+  renderer.AddMesh(&mesh0);
 
   VertexShader vert(LoadAsset("Vertex.glsl").c_str());
   FragmentShader frag(LoadAsset("Fragment.glsl").c_str());
-
   Shader shader(vert, frag);
 
   glDeleteShader(vert.GetID());
   glDeleteShader(vert.GetID());
 
   renderer.SetShader(shader);
-
-  Entity entity;
-  Component *component;
-  entity.AddComponent(component);
-  entity.RemoveComponent(component);
 
   int result = game.Start();
 
