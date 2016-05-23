@@ -17,7 +17,7 @@ public:
 
   void GenerateVertexArray();
 
-  void GetGL(std::vector<GLfloat> *array, int size);
+  void GetGL(std::vector<GLfloat> *array);
 
 private:
   std::vector<Triangle> triangles;

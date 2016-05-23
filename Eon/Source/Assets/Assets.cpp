@@ -1,12 +1,14 @@
+#include <SOIL.h>
 #include <fstream>
 #include <iostream>
 
-#include "Assets.h"
+#include "Assets/Assets.h"
 #include "Common.h"
 
-std::string assetsDir("../Assets/");
-
-std::string LoadPosix(const char *name) {
+namespace eon {
+namespace assets {
+const std::string assetsDir("../Assets/");
+std::string LoadTextPosix(const char *name) {
   std::string fileName(assetsDir + name);
   std::ifstream file(fileName.c_str(), std::ios::in);
 
@@ -27,11 +29,19 @@ std::string LoadPosix(const char *name) {
   return ret;
 }
 
-std::string LoadAsset(const char *name) {
+std::string LoadText(const char *name) {
 #ifdef __linux__
-  return LoadPosix(name);
+  return LoadTextPosix(name);
 #elif _WIN32
   return std::string("");
 #endif
   return std::string("");
+}
+
+byte *LoadImage(const char *name, int *width, int *height) {
+  std::string fileName(assetsDir + name);
+
+  return SOIL_load_image(fileName.c_str(), width, height, 0, SOIL_LOAD_RGB);
+}
+}
 }

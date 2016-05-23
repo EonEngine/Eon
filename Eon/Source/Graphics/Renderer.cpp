@@ -1,10 +1,15 @@
 #include <SDL.h>
 
+#include "Assets/Assets.h"
 #include "Eon.h"
 #include "Graphics/Renderer.h"
 
+using namespace eon::assets;
+
 namespace eon {
 namespace graphics {
+
+GLuint texture;
 
 Renderer::Renderer(const char *name, int width, int height)
     : bgColor(0, 0, 0, 1) {
@@ -29,6 +34,18 @@ Renderer::Renderer(const char *name, int width, int height)
   SDL_GLContext context = SDL_GL_CreateContext(window);
 
   glViewport(0, 0, width, height);
+
+  int textureW, textureH;
+  byte *image = LoadImage("Tiles.jpg", &textureW, &textureH);
+  glGenTextures(1, &texture);
+  glBindTexture(GL_TEXTURE_2D, texture);
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textureW, textureH, 0, GL_RGB,
+               GL_UNSIGNED_BYTE, image);
+  glGenerateMipmap(GL_TEXTURE_2D);
+
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+  glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 Renderer::~Renderer() { SDL_DestroyWindow(window); }
@@ -41,7 +58,9 @@ void Renderer::Render() {
   GLint colorLocation = glGetUniformLocation(currentShader, "vColor");
   glUniform4f(colorLocation, 0.0f, greenValue, 0.0f, 1.0f);
 
+  glBindTexture(GL_TEXTURE_2D, texture);
   for (int i = 0; i < meshes.size(); i++) {
+
     meshes[i]->Render();
   }
 

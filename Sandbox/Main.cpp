@@ -3,7 +3,7 @@
 
 #include <Eon.h>
 
-#include <Assets.h>
+#include <Assets/Assets.h>
 #include <Entity/Component.h>
 #include <Entity/Entity.h>
 #include <Graphics/Color.h>
@@ -12,6 +12,7 @@
 #include <Math/Vec3.h>
 
 using namespace eon;
+using namespace eon::assets;
 using namespace eon::entity;
 using namespace eon::graphics;
 using namespace eon::math;
@@ -33,8 +34,8 @@ int main() {
 
   renderer.AddMesh(&mesh0);
 
-  VertexShader vert(LoadAsset("Vertex.glsl").c_str());
-  FragmentShader frag(LoadAsset("Fragment.glsl").c_str());
+  VertexShader vert(LoadText("Vertex.glsl").c_str());
+  FragmentShader frag(LoadText("Fragment.glsl").c_str());
   Shader shader(vert, frag);
 
   glDeleteShader(vert.GetID());
@@ -45,9 +46,9 @@ int main() {
   int result = game.Start();
 
   if (result != 0) {
-    std::cout << "Eon was stopped due to an internal error";
+    std::cout << "Eon was stopped due to an internal error" << std::endl;
   } else {
-    std::cout << "Eon exited normally";
+    std::cout << "Eon exited normally" << std::endl;
   }
   return 0;
 }

@@ -16,6 +16,9 @@ int Game::Start() {
       case SDL_QUIT: {
         return 0;
       }
+      case SDL_KEYDOWN: {
+        return 0;
+      }
       }
     }
     renderer->Render();
