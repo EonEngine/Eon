@@ -36,7 +36,7 @@ Renderer::Renderer(const char *name, int width, int height)
   glViewport(0, 0, width, height);
 
   int textureW, textureH;
-  byte *image = LoadImage("Tiles.jpg", &textureW, &textureH);
+  byte *image = LoadImage("Concrete.jpg", &textureW, &textureH);
   glGenTextures(1, &texture);
   glBindTexture(GL_TEXTURE_2D, texture);
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textureW, textureH, 0, GL_RGB,

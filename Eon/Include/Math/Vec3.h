@@ -9,14 +9,24 @@ class Vec3 {
 public:
   Vec3(float xCoord, float yCoord, float zCoord);
 
-  float GetX();
-  float GetY();
-  float GetZ();
+  float x, y, z;
+
+  Vec3 operator+(const float &scalar);
+  Vec3 operator-(const float &scalar);
+
+  Vec3 operator+(const Vec3 &other);
+  Vec3 operator-(const Vec3 &other);
+
+  Vec3 operator*(const float &scalar);
+  Vec3 operator/(const float &scalar);
+
+  Vec3 operator*(const Vec3 &other);
+  Vec3 operator/(const Vec3 &other);
 
   float Distance();
-
-private:
-  float x, y, z;
+  float Dot(Vec3 &other);
+  Vec3 Cross(Vec3 &other);
+  Vec3 Negate();
 };
 }
 }

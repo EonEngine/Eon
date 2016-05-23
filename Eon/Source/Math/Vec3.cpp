@@ -10,12 +10,47 @@ Vec3::Vec3(float xCoord, float yCoord, float zCoord) {
   z = zCoord;
 }
 
+Vec3 Vec3::operator+(const float &scalar) {
+  return Vec3(x + scalar, y + scalar, z + scalar);
+}
+
+Vec3 Vec3::operator-(const float &scalar) {
+  return Vec3(x - scalar, y - scalar, z - scalar);
+}
+
+Vec3 Vec3::operator+(const Vec3 &other) {
+  return Vec3(x + other.x, y + other.y, z + other.z);
+}
+
+Vec3 Vec3::operator-(const Vec3 &other) {
+  return Vec3(x - other.x, y - other.y, z - other.z);
+}
+
+Vec3 Vec3::operator*(const float &scalar) {
+  return Vec3(x * scalar, y * scalar, z * scalar);
+}
+
+Vec3 Vec3::operator/(const float &scalar) {
+  return Vec3(x / scalar, y / scalar, z / scalar);
+}
+
+Vec3 Vec3::operator*(const Vec3 &other) {
+  return Vec3(x * other.x, y * other.y, z * other.z);
+}
+
+Vec3 Vec3::operator/(const Vec3 &other) {
+  return Vec3(x / other.x, y / other.y, z / other.z);
+}
+
 float Vec3::Distance() { return sqrt(x * x + y * y + z * z); }
 
-float Vec3::GetX() { return x; }
+float Vec3::Dot(Vec3 &other) { return x * other.x + y * other.y + z * other.z; }
 
-float Vec3::GetY() { return y; }
+Vec3 Vec3::Cross(Vec3 &other) {
+  return Vec3(y * other.z - z * other.y, z * other.x - x * other.z,
+              x * other.y - y * other.x);
+}
 
-float Vec3::GetZ() { return z; }
+Vec3 Vec3::Negate() { return Vec3(-x, -y, -z); }
 }
 }

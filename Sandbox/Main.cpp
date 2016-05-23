@@ -9,7 +9,9 @@
 #include <Graphics/Color.h>
 #include <Graphics/Mesh.h>
 #include <Graphics/Renderer.h>
+#include <Math/Vec2.h>
 #include <Math/Vec3.h>
+#include <Math/Vec4.h>
 
 using namespace eon;
 using namespace eon::assets;
@@ -24,9 +26,10 @@ int main() {
   Game game(&renderer);
   renderer.SetBackgroundColor(Color(0.1, 0.1, 0.1, 1));
 
-  Triangle triangle0(Vec3(0.5, 0.5, 0), Vec3(0.5, -0.5, 0), Vec3(-0.5, 0.5, 0));
-  Triangle triangle1(Vec3(0.5, -0.5, 0), Vec3(-0.5, -0.5, 0),
-                     Vec3(-0.5, 0.5, 0));
+  Triangle triangle0(Vec3(1, 1, 0), Vec3(1, -1, 0), Vec3(-1, 1, 0), Vec2(1, 1),
+                     Vec2(1, 0), Vec2(0, 1));
+  Triangle triangle1(Vec3(1, -1, 0), Vec3(-1, -1, 0), Vec3(-1, 1, 0),
+                     Vec2(1, 0), Vec2(0, 0), Vec2(0, 1));
 
   Mesh mesh0;
   mesh0.AddTriangle(triangle0);
