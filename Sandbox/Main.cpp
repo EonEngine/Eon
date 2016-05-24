@@ -10,6 +10,7 @@
 #include <Graphics/Mesh.h>
 #include <Graphics/Renderer.h>
 #include <Graphics/Texture.h>
+#include <Math/Mat4.h>
 #include <Math/Vec2.h>
 #include <Math/Vec3.h>
 #include <Math/Vec4.h>
@@ -48,7 +49,28 @@ int main() {
   glDeleteShader(vert.GetID());
   renderer.SetShader(shader);
 
-  int result = game.Start();
+  Mat4 transform(1);
+  transform.Set(0, 3, 3);
+  transform.Set(1, 3, 3);
+  transform.Set(2, 3, 3);
+
+  std::cout << "Transform Matrix: " << std::endl;
+  transform.Print();
+
+  Mat4 vector(0);
+  vector.Set(0, 0, 4);
+  vector.Set(1, 0, 4);
+  vector.Set(2, 0, 4);
+  vector.Set(3, 0, 4);
+
+  std::cout << "Vector: " << std::endl;
+  vector.Print();
+
+  std::cout << "Transform Matrix * Vector: " << std::endl;
+  transform *= vector;
+  transform.Print();
+
+  int result = /*game.Start()*/ 0;
 
   if (result != 0) {
     std::cout << "Eon was stopped due to an internal error" << std::endl;

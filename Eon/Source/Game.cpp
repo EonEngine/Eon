@@ -1,5 +1,4 @@
 #include <SDL.h>
-#include <stdlib.h>
 
 #include "Eon.h"
 #include "Game.h"

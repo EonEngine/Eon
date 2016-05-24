@@ -20,6 +20,7 @@ add_library(Eon
   Eon/Source/Graphics/Texture.cpp
   Eon/Source/Graphics/Triangle.cpp
   Eon/Source/Graphics/VertexShader.cpp
+  Eon/Source/Math/Mat4.cpp
   Eon/Source/Math/Vec2.cpp
   Eon/Source/Math/Vec3.cpp
   Eon/Source/Math/Vec4.cpp
