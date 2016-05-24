@@ -3,13 +3,14 @@
 #include "Assets/Assets.h"
 #include "Eon.h"
 #include "Graphics/Renderer.h"
+#include "Graphics/Texture.h"
 
 using namespace eon::assets;
 
 namespace eon {
 namespace graphics {
 
-GLuint texture;
+GLint colorLocation;
 
 Renderer::Renderer(const char *name, int width, int height)
     : bgColor(0, 0, 0, 1) {
@@ -34,18 +35,6 @@ Renderer::Renderer(const char *name, int width, int height)
   SDL_GLContext context = SDL_GL_CreateContext(window);
 
   glViewport(0, 0, width, height);
-
-  int textureW, textureH;
-  byte *image = LoadImage("Concrete.jpg", &textureW, &textureH);
-  glGenTextures(1, &texture);
-  glBindTexture(GL_TEXTURE_2D, texture);
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textureW, textureH, 0, GL_RGB,
-               GL_UNSIGNED_BYTE, image);
-  glGenerateMipmap(GL_TEXTURE_2D);
-
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-  glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 Renderer::~Renderer() { SDL_DestroyWindow(window); }
@@ -55,14 +44,16 @@ void Renderer::Render() {
   glClear(GL_COLOR_BUFFER_BIT);
 
   GLfloat greenValue = (sin((float)SDL_GetTicks() / 700) / 2) + 0.5;
-  GLint colorLocation = glGetUniformLocation(currentShader, "vColor");
   glUniform4f(colorLocation, 0.0f, greenValue, 0.0f, 1.0f);
 
-  glBindTexture(GL_TEXTURE_2D, texture);
+  glBindTexture(GL_TEXTURE_2D, currentTexture);
+
   for (int i = 0; i < meshes.size(); i++) {
 
     meshes[i]->Render();
   }
+
+  glBindTexture(GL_TEXTURE_2D, 0);
 
   SDL_GL_SwapWindow(window);
 }
@@ -85,6 +76,9 @@ Color Renderer::GetBackgroundColor() { return bgColor; }
 void Renderer::SetShader(Shader shader) {
   glUseProgram(shader.GetID());
   currentShader = shader.GetID();
+  GLint colorLocation = glGetUniformLocation(currentShader, "vColor");
 }
+
+void Renderer::SetTexture(Texture texture) { currentTexture = texture.GetID(); }
 }
 }

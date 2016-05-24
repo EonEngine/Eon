@@ -43,5 +43,7 @@ byte *LoadImage(const char *name, int *width, int *height) {
 
   return SOIL_load_image(fileName.c_str(), width, height, 0, SOIL_LOAD_RGB);
 }
+
+void UnloadImage(byte *image) { SOIL_free_image_data(image); }
 }
 }

@@ -8,6 +8,7 @@
 #include "Graphics/Color.h"
 #include "Graphics/Mesh.h"
 #include "Graphics/Shader.h"
+#include "Graphics/Texture.h"
 
 namespace eon {
 namespace graphics {
@@ -26,6 +27,8 @@ public:
 
   void SetShader(Shader shader);
 
+  void SetTexture(Texture texture);
+
 private:
   SDL_Window *window;
   Color bgColor;
@@ -33,6 +36,8 @@ private:
   std::vector<Mesh *> meshes;
 
   GLuint currentShader;
+
+  GLuint currentTexture;
 };
 }
 }

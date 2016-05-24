@@ -7,6 +7,7 @@ namespace eon {
 namespace assets {
 std::string LoadText(const char *name);
 byte *LoadImage(const char *name, int *width, int *height);
+void UnloadImage(byte *image);
 }
 }
 
