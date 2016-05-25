@@ -11,6 +11,7 @@ public:
   Mat4(float diagonal);
 
   inline float Get(uint i, uint j) { return elements[i + j * 4]; };
+  inline float *GetElements() { return elements; };
   inline void Set(uint i, uint j, float val) { elements[i + j * 4] = val; };
 
   Mat4 operator*(Mat4 &other);

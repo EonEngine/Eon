@@ -9,6 +9,7 @@
 #include "Graphics/Mesh.h"
 #include "Graphics/Shader.h"
 #include "Graphics/Texture.h"
+#include "Math/Mat4.h"
 
 namespace eon {
 namespace graphics {
@@ -38,6 +39,10 @@ private:
   GLuint currentShader;
 
   GLuint currentTexture;
+
+  Mat4 model;
+  Mat4 view;
+  Mat4 proj;
 };
 }
 }

@@ -6,14 +6,13 @@
 #include "Graphics/Texture.h"
 
 using namespace eon::assets;
+using namespace eon::math;
 
 namespace eon {
 namespace graphics {
 
-GLint colorLocation;
-
 Renderer::Renderer(const char *name, int width, int height)
-    : bgColor(0, 0, 0, 1) {
+    : bgColor(0, 0, 0, 1), model(0), view(0), proj(0) {
   if (SDL_Init(SDL_INIT_VIDEO) != 0) {
     std::cout << "SDL Error: " << SDL_GetError() << std::endl;
   }
@@ -35,6 +34,12 @@ Renderer::Renderer(const char *name, int width, int height)
   SDL_GLContext context = SDL_GL_CreateContext(window);
 
   glViewport(0, 0, width, height);
+
+  model = Mat4::Translate(Vec3(0, 0, 0));
+  view = Mat4::Translate(Vec3(0, 0, -9));
+  Mat4 rotation = Mat4::RotateX(M_PI / 8);
+  view *= rotation;
+  proj = Mat4::Persp(M_PI / 4, width / height, 0.1, 100);
 }
 
 Renderer::~Renderer() { SDL_DestroyWindow(window); }
@@ -43,8 +48,14 @@ void Renderer::Render() {
   glClearColor(bgColor.red, bgColor.green, bgColor.blue, bgColor.alpha);
   glClear(GL_COLOR_BUFFER_BIT);
 
-  GLfloat greenValue = (sin((float)SDL_GetTicks() / 700) / 2) + 0.5;
-  glUniform4f(colorLocation, 0.0f, greenValue, 0.0f, 1.0f);
+  GLint modelLoc = glGetUniformLocation(currentShader, "model");
+  glUniformMatrix4fv(modelLoc, 1, GL_FALSE, model.GetElements());
+
+  GLint viewLoc = glGetUniformLocation(currentShader, "view");
+  glUniformMatrix4fv(viewLoc, 1, GL_FALSE, view.GetElements());
+
+  GLint projLoc = glGetUniformLocation(currentShader, "proj");
+  glUniformMatrix4fv(projLoc, 1, GL_FALSE, proj.GetElements());
 
   glBindTexture(GL_TEXTURE_2D, currentTexture);
 
@@ -76,7 +87,6 @@ Color Renderer::GetBackgroundColor() { return bgColor; }
 void Renderer::SetShader(Shader shader) {
   glUseProgram(shader.GetID());
   currentShader = shader.GetID();
-  GLint colorLocation = glGetUniformLocation(currentShader, "vColor");
 }
 
 void Renderer::SetTexture(Texture texture) { currentTexture = texture.GetID(); }

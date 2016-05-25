@@ -28,10 +28,10 @@ int main() {
   Game game(&renderer);
   renderer.SetBackgroundColor(Color(0.1, 0.1, 0.1, 1));
 
-  Triangle triangle0(Vec3(1, 1, 0), Vec3(1, -1, 0), Vec3(-1, 1, 0), Vec2(1, 1),
-                     Vec2(1, 0), Vec2(0, 1));
-  Triangle triangle1(Vec3(1, -1, 0), Vec3(-1, -1, 0), Vec3(-1, 1, 0),
-                     Vec2(1, 0), Vec2(0, 0), Vec2(0, 1));
+  Triangle triangle0(Vec3(0.5, 0.5, 0), Vec3(0.5, -0.5, 0), Vec3(-0.5, 0.5, 0),
+                     Vec2(0.5, 1), Vec2(0.5, 0), Vec2(0, 1));
+  Triangle triangle1(Vec3(0.5, -0.5, 0), Vec3(-0.5, -0.5, 0),
+                     Vec3(-0.5, 0.5, 0), Vec2(0.5, 0), Vec2(0, 0), Vec2(0, 1));
 
   Texture texture("Tiles.jpg");
   renderer.SetTexture(texture);
@@ -41,20 +41,13 @@ int main() {
   mesh0.AddTriangle(triangle1);
   renderer.AddMesh(&mesh0);
 
-  VertexShader vert(LoadText("Vertex.glsl").c_str());
-  FragmentShader frag(LoadText("Fragment.glsl").c_str());
-  Shader shader(vert, frag);
+  Shader shader(LoadText("Vertex.glsl").c_str(),
+                LoadText("Fragment.glsl").c_str());
   // TODO: Add this cleanup to Shader class
-  glDeleteShader(vert.GetID());
-  glDeleteShader(vert.GetID());
+
   renderer.SetShader(shader);
 
-  Mat4 transform = Mat4::RotateZ(3.141);
-
-  std::cout << "Transform Matrix: " << std::endl;
-  transform.Print();
-
-  int result = /*game.Start()*/ 0;
+  int result = game.Start();
 
   if (result != 0) {
     std::cout << "Eon was stopped due to an internal error" << std::endl;
