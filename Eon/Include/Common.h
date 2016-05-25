@@ -5,6 +5,7 @@
 #include <GL/gl.h>
 
 #include <iostream>
+#include <math.h>
 
 #include "Types.h"
 

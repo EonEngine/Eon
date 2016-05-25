@@ -49,25 +49,9 @@ int main() {
   glDeleteShader(vert.GetID());
   renderer.SetShader(shader);
 
-  Mat4 transform(1);
-  transform.Set(0, 3, 3);
-  transform.Set(1, 3, 3);
-  transform.Set(2, 3, 3);
+  Mat4 transform = Mat4::RotateZ(3.141);
 
   std::cout << "Transform Matrix: " << std::endl;
-  transform.Print();
-
-  Mat4 vector(0);
-  vector.Set(0, 0, 4);
-  vector.Set(1, 0, 4);
-  vector.Set(2, 0, 4);
-  vector.Set(3, 0, 4);
-
-  std::cout << "Vector: " << std::endl;
-  vector.Print();
-
-  std::cout << "Transform Matrix * Vector: " << std::endl;
-  transform *= vector;
   transform.Print();
 
   int result = /*game.Start()*/ 0;

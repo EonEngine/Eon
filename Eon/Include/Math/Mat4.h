@@ -1,6 +1,9 @@
 #ifndef EON_MATH_MAT4_H
 #define EON_MATH_MAT4_H
 
+#include "Math/Vec3.h"
+#include "Math/Vec4.h"
+
 namespace eon {
 namespace math {
 class Mat4 {
@@ -11,7 +14,18 @@ public:
   inline void Set(uint i, uint j, float val) { elements[i + j * 4] = val; };
 
   Mat4 operator*(Mat4 &other);
-  Mat4 operator*=(Mat4 &other);
+  Vec4 operator*(Vec4 &other);
+  void operator*=(Mat4 &other);
+
+  static Mat4 Translate(Vec3 delta);
+
+  static Mat4 RotateX(float radians);
+  static Mat4 RotateY(float radians);
+  static Mat4 RotateZ(float radians);
+
+  static Mat4 Ortho(float left, float right, float bottom, float top,
+                    float near, float far);
+  static Mat4 Persp(float fov, float aspectRatio, float near, float far);
 
   void Print();
 
