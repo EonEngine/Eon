@@ -1,21 +1,36 @@
+#include <vector>
+
 #include "Eon.h"
 #include "Graphics/Mesh.h"
 
 namespace eon {
 namespace graphics {
-int Mesh::AddTriangle(Triangle triangle) {
-  triangles.push_back(triangle);
+Mesh::Mesh(float *verts, int numVertices, bool texCoords) {
+  if (texCoords) {
+    for (int i = 0; i < numVertices * 5; i += 5) {
+      vertices.push_back(Vertex(Vec3(verts[i], verts[i + 1], verts[i + 2]),
+                                Vec2(verts[i + 3], verts[i + 4])));
+    }
+  } else {
+    for (int i = 0; i < numVertices * 3; i += 3) {
+      vertices.push_back(Vertex(Vec3(verts[i], verts[i + 1], verts[i + 2])));
+    }
+  }
   GenerateVertexArray();
-  return triangles.size() - 1;
 }
 
-void Mesh::RemoveTriangle(int index) {
-  triangles.erase(triangles.begin() + index);
+int Mesh::AddVertex(Vertex vertex) {
+  vertices.push_back(vertex);
+  GenerateVertexArray();
+  return vertices.size() - 1;
+}
+
+void Mesh::RemoveVertex(int index) {
+  vertices.erase(vertices.begin() + index);
   GenerateVertexArray();
 }
 
 void Mesh::GenerateVertexArray() {
-  int numVerts = triangles.size() * 9;
   std::vector<GLfloat> verts;
   GetGL(&verts);
 
@@ -27,7 +42,7 @@ void Mesh::GenerateVertexArray() {
   GLuint vbo;
   glGenBuffers(1, &vbo);
   glBindBuffer(GL_ARRAY_BUFFER, vbo);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 24 * triangles.size(),
+  glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 5 * vertices.size(),
                &verts[0], GL_STATIC_DRAW);
 
   // Position data
@@ -43,30 +58,20 @@ void Mesh::GenerateVertexArray() {
 }
 
 void Mesh::Render() {
-  if (triangles.size() > 0) {
+  if (vertices.size() > 0) {
     glBindVertexArray(id);
-    glDrawArrays(GL_TRIANGLES, 0, triangles.size() * 3);
+    glDrawArrays(GL_TRIANGLES, 0, vertices.size());
     glBindVertexArray(0);
   }
 }
 
 void Mesh::GetGL(std::vector<GLfloat> *array) {
-  for (int i = 0; i < triangles.size(); i++) {
-    array->push_back((GLfloat)triangles[i].p1.x);
-    array->push_back((GLfloat)triangles[i].p1.y);
-    array->push_back((GLfloat)triangles[i].p1.z);
-    array->push_back((GLfloat)triangles[i].p1Tex.x);
-    array->push_back((GLfloat)triangles[i].p1Tex.y);
-    array->push_back((GLfloat)triangles[i].p2.x);
-    array->push_back((GLfloat)triangles[i].p2.y);
-    array->push_back((GLfloat)triangles[i].p2.z);
-    array->push_back((GLfloat)triangles[i].p2Tex.x);
-    array->push_back((GLfloat)triangles[i].p2Tex.y);
-    array->push_back((GLfloat)triangles[i].p3.x);
-    array->push_back((GLfloat)triangles[i].p3.y);
-    array->push_back((GLfloat)triangles[i].p3.z);
-    array->push_back((GLfloat)triangles[i].p3Tex.x);
-    array->push_back((GLfloat)triangles[i].p3Tex.y);
+  for (int i = 0; i < vertices.size(); i++) {
+    array->push_back((GLfloat)vertices[i].pos.x);
+    array->push_back((GLfloat)vertices[i].pos.y);
+    array->push_back((GLfloat)vertices[i].pos.z);
+    array->push_back((GLfloat)vertices[i].tex.x);
+    array->push_back((GLfloat)vertices[i].tex.y);
   }
 }
 }

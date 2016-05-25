@@ -1,5 +1,5 @@
-#ifndef EON_RENDERER_RENDERER_H
-#define EON_RENDERER_RENDERER_H
+#ifndef EON_GRAPHICS_RENDERER_H
+#define EON_GRAPHICS_RENDERER_H
 
 #include <SDL.h>
 #include <vector>

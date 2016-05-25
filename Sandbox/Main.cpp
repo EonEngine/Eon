@@ -10,6 +10,7 @@
 #include <Graphics/Mesh.h>
 #include <Graphics/Renderer.h>
 #include <Graphics/Texture.h>
+#include <Graphics/Vertex.h>
 #include <Math/Mat4.h>
 #include <Math/Vec2.h>
 #include <Math/Vec3.h>
@@ -28,17 +29,35 @@ int main() {
   Game game(&renderer);
   renderer.SetBackgroundColor(Color(0.1, 0.1, 0.1, 1));
 
-  Triangle triangle0(Vec3(0.5, 0.5, 0), Vec3(0.5, -0.5, 0), Vec3(-0.5, 0.5, 0),
-                     Vec2(0.5, 1), Vec2(0.5, 0), Vec2(0, 1));
-  Triangle triangle1(Vec3(0.5, -0.5, 0), Vec3(-0.5, -0.5, 0),
-                     Vec3(-0.5, 0.5, 0), Vec2(0.5, 0), Vec2(0, 0), Vec2(0, 1));
-
   Texture texture("Tiles.jpg");
   renderer.SetTexture(texture);
 
-  Mesh mesh0;
-  mesh0.AddTriangle(triangle0);
-  mesh0.AddTriangle(triangle1);
+  float verts[] = {
+      -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 0.5f,  -0.5f, -0.5f, 1.0f, 0.0f,
+      0.5f,  0.5f,  -0.5f, 1.0f, 1.0f, 0.5f,  0.5f,  -0.5f, 1.0f, 1.0f,
+      -0.5f, 0.5f,  -0.5f, 0.0f, 1.0f, -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
+
+      -0.5f, -0.5f, 0.5f,  0.0f, 0.0f, 0.5f,  -0.5f, 0.5f,  1.0f, 0.0f,
+      0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+      -0.5f, 0.5f,  0.5f,  0.0f, 1.0f, -0.5f, -0.5f, 0.5f,  0.0f, 0.0f,
+
+      -0.5f, 0.5f,  0.5f,  1.0f, 0.0f, -0.5f, 0.5f,  -0.5f, 1.0f, 1.0f,
+      -0.5f, -0.5f, -0.5f, 0.0f, 1.0f, -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+      -0.5f, -0.5f, 0.5f,  0.0f, 0.0f, -0.5f, 0.5f,  0.5f,  1.0f, 0.0f,
+
+      0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.5f,  0.5f,  -0.5f, 1.0f, 1.0f,
+      0.5f,  -0.5f, -0.5f, 0.0f, 1.0f, 0.5f,  -0.5f, -0.5f, 0.0f, 1.0f,
+      0.5f,  -0.5f, 0.5f,  0.0f, 0.0f, 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+      -0.5f, -0.5f, -0.5f, 0.0f, 1.0f, 0.5f,  -0.5f, -0.5f, 1.0f, 1.0f,
+      0.5f,  -0.5f, 0.5f,  1.0f, 0.0f, 0.5f,  -0.5f, 0.5f,  1.0f, 0.0f,
+      -0.5f, -0.5f, 0.5f,  0.0f, 0.0f, -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+
+      -0.5f, 0.5f,  -0.5f, 0.0f, 1.0f, 0.5f,  0.5f,  -0.5f, 1.0f, 1.0f,
+      0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+      -0.5f, 0.5f,  0.5f,  0.0f, 0.0f, -0.5f, 0.5f,  -0.5f, 0.0f, 1.0f};
+
+  Mesh mesh0(verts, 36, true);
   renderer.AddMesh(&mesh0);
 
   Shader shader(LoadText("Vertex.glsl").c_str(),

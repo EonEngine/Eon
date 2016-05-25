@@ -21,7 +21,7 @@ int Game::Start() {
       }
     }
     renderer->Render();
-    std::cout << "FPS: " << 1000 / timer.GetMs() << std::endl;
+    std::cout << "FPS: " << 1000 / timer.GetMs() << "\r";
   }
 }
 }

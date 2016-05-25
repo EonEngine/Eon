@@ -1,5 +1,5 @@
-#ifndef EON_RENDERER_COLOR_H
-#define EON_RENDERER_COLOR_H
+#ifndef EON_GRAPHICS_COLOR_H
+#define EON_GRAPHICS_COLOR_H
 
 #include "Common.h"
 

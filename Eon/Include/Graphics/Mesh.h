@@ -1,17 +1,22 @@
-#ifndef EON_RENDERER_MESH_H
-#define EON_RENDERER_MESH_H
+#ifndef EON_GRAPHICS_MESH_H
+#define EON_GRAPHICS_MESH_H
 
 #include <vector>
 
 #include "Common.h"
-#include "Graphics/Triangle.h"
+#include "Graphics/Vertex.h"
+#include "Math/Vec2.h"
+#include "Math/Vec3.h"
 
 namespace eon {
 namespace graphics {
 class Mesh {
 public:
-  int AddTriangle(Triangle triangle);
-  void RemoveTriangle(int index);
+  Mesh();
+  Mesh(float* verts, int numVertices, bool texCoords);
+
+  int AddVertex(Vertex vertex);
+  void RemoveVertex(int index);
 
   void Render();
 
@@ -20,7 +25,7 @@ public:
   void GetGL(std::vector<GLfloat> *array);
 
 private:
-  std::vector<Triangle> triangles;
+  std::vector<Vertex> vertices;
 
   GLuint id;
 };

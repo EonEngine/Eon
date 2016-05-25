@@ -33,20 +33,23 @@ Renderer::Renderer(const char *name, int width, int height)
 
   SDL_GLContext context = SDL_GL_CreateContext(window);
 
-  glViewport(0, 0, width, height);
+  std::cout << "OpenGL " << glGetString(GL_VERSION) << std::endl;
 
-  model = Mat4::Translate(Vec3(0, 0, 0));
-  view = Mat4::Translate(Vec3(0, 0, -9));
-  Mat4 rotation = Mat4::RotateX(M_PI / 8);
-  view *= rotation;
-  proj = Mat4::Persp(M_PI / 4, width / height, 0.1, 100);
+  glViewport(0, 0, width, height);
+  glEnable(GL_DEPTH_TEST);
+
+  model = Mat4(0);
+  view = Mat4::Translate(Vec3(0, 0, -3));
+  proj = Mat4::Persp(M_PI / 2, width / height, 0.1, 100);
 }
 
 Renderer::~Renderer() { SDL_DestroyWindow(window); }
 
 void Renderer::Render() {
   glClearColor(bgColor.red, bgColor.green, bgColor.blue, bgColor.alpha);
-  glClear(GL_COLOR_BUFFER_BIT);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+  model = Mat4::RotateX(sin((float)SDL_GetTicks() / 2000));
 
   GLint modelLoc = glGetUniformLocation(currentShader, "model");
   glUniformMatrix4fv(modelLoc, 1, GL_FALSE, model.GetElements());
