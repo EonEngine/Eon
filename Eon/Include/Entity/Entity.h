@@ -5,6 +5,7 @@
 
 #include "Common.h"
 #include "Entity/Component.h"
+#include "Entity/Components/Components.h"
 
 // TODO: Use hash map for components
 namespace eon {
@@ -13,6 +14,7 @@ class Entity {
 public:
   void AddComponent(Component *component);
   void RemoveComponent(Component *component);
+  bool HasComponent(ComponentType type);
   int NumComponents();
 
 private:

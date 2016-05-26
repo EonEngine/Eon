@@ -38,9 +38,9 @@ Renderer::Renderer(const char *name, int width, int height)
   glViewport(0, 0, width, height);
   glEnable(GL_DEPTH_TEST);
 
-  model = Mat4(0);
-  view = Mat4::Translate(Vec3(0, 0, -3));
-  proj = Mat4::Persp(M_PI / 2, width / height, 0.1, 100);
+  model = Mat4(1);
+  view = Mat4::Translate(Vec3(0, 0, 2));
+  proj = Mat4::Persp(M_PI / 2, (float)width / (float)height, 0.1, 100);
 }
 
 Renderer::~Renderer() { SDL_DestroyWindow(window); }
@@ -49,7 +49,9 @@ void Renderer::Render() {
   glClearColor(bgColor.red, bgColor.green, bgColor.blue, bgColor.alpha);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-  model = Mat4::RotateX(sin((float)SDL_GetTicks() / 2000));
+  Mat4 rotateY = Mat4::RotateY(sin((float)SDL_GetTicks() / 2500) * 2 * M_PI);
+  model = Mat4::RotateX(sin((float)SDL_GetTicks() / 700));
+  model *= rotateY;
 
   GLint modelLoc = glGetUniformLocation(currentShader, "model");
   glUniformMatrix4fv(modelLoc, 1, GL_FALSE, model.GetElements());
@@ -63,7 +65,6 @@ void Renderer::Render() {
   glBindTexture(GL_TEXTURE_2D, currentTexture);
 
   for (int i = 0; i < meshes.size(); i++) {
-
     meshes[i]->Render();
   }
 

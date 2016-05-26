@@ -12,6 +12,8 @@ add_library(Eon
   Eon/Source/Assets/Assets.cpp
   Eon/Source/Entity/Entity.cpp
   Eon/Source/Entity/Component.cpp
+  Eon/Source/Entity/Components/MeshComponent.cpp
+  Eon/Source/Entity/Components/TransformComponent.cpp
   Eon/Source/Graphics/Color.cpp
   Eon/Source/Graphics/Mesh.cpp
   Eon/Source/Graphics/Renderer.cpp
@@ -23,7 +25,8 @@ add_library(Eon
   Eon/Source/Math/Vec3.cpp
   Eon/Source/Math/Vec4.cpp
   Eon/Source/Game.cpp
-  Eon/Source/Timer.cpp)
+  Eon/Source/Timer.cpp
+  Eon/Source/World.cpp)
 
 add_executable(Sandbox Sandbox/Main.cpp)
 

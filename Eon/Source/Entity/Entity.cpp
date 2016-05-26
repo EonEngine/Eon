@@ -16,6 +16,15 @@ void Entity::RemoveComponent(Component *component) {
   }
 }
 
+bool Entity::HasComponent(ComponentType type) {
+  for (int i; i < components.size(); i++) {
+    if (components[i]->GetType() == type) {
+      return true;
+    }
+  }
+  return false;
+}
+
 int Entity::NumComponents() { return components.size(); }
 }
 }

@@ -8,7 +8,7 @@ namespace eon {
 namespace graphics {
 Texture::Texture(const char *fileName) {
   int textureW, textureH;
-  byte *image = LoadImage("Concrete.jpg", &textureW, &textureH);
+  byte *image = LoadImage(fileName, &textureW, &textureH);
   glGenTextures(1, &id);
   glBindTexture(GL_TEXTURE_2D, id);
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textureW, textureH, 0, GL_RGB,

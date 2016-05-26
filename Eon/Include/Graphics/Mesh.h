@@ -15,6 +15,8 @@ public:
   Mesh();
   Mesh(float* verts, int numVertices, bool texCoords);
 
+  inline int GetNumVerts() { return vertices.size(); };
+
   int AddVertex(Vertex vertex);
   void RemoveVertex(int index);
 

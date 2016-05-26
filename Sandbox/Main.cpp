@@ -5,6 +5,8 @@
 
 #include <Assets/Assets.h>
 #include <Entity/Component.h>
+#include <Entity/Components/Components.h>
+#include <Entity/Components/TransformComponent.h>
 #include <Entity/Entity.h>
 #include <Graphics/Color.h>
 #include <Graphics/Mesh.h>
@@ -15,6 +17,7 @@
 #include <Math/Vec2.h>
 #include <Math/Vec3.h>
 #include <Math/Vec4.h>
+#include <World.h>
 
 using namespace eon;
 using namespace eon::assets;
@@ -57,12 +60,19 @@ int main() {
       0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
       -0.5f, 0.5f,  0.5f,  0.0f, 0.0f, -0.5f, 0.5f,  -0.5f, 0.0f, 1.0f};
 
-  Mesh mesh0(verts, 36, true);
-  renderer.AddMesh(&mesh0);
+  Mesh mesh(verts, 36, true);
+  renderer.AddMesh(&mesh);
+
+  Entity entity;
+  TransformComponent component(Vec3(0, 0, 0), Vec3(1, 1, 1));
+  entity.AddComponent(&component);
+  std::cout << entity.HasComponent(TRANSFORM_COMPONENT) << std::endl;
+
+  World world;
+  world.AddEntity(&entity);
 
   Shader shader(LoadText("Vertex.glsl").c_str(),
                 LoadText("Fragment.glsl").c_str());
-  // TODO: Add this cleanup to Shader class
 
   renderer.SetShader(shader);
 

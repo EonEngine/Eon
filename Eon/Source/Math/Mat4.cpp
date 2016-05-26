@@ -113,11 +113,14 @@ Mat4 Mat4::Ortho(float left, float right, float bottom, float top, float near,
 Mat4 Mat4::Persp(float fov, float aspectRatio, float near, float far) {
   Mat4 ret(0);
 
-  ret.Set(0, 0, 1 / (aspectRatio * tan(fov / 2)));
-  ret.Set(1, 1, 1 / (tan(fov / 2)));
-  ret.Set(2, 2, -((far + near) / (far - near)));
-  ret.Set(2, 3, -((2 * far * near) / (far - near)));
-  ret.Set(3, 2, -1);
+  float range = near - far;
+  float tanHalfFov = tan(fov / 2);
+
+  ret.Set(0, 0, 1 / (tanHalfFov * aspectRatio));
+  ret.Set(1, 1, 1 / tanHalfFov);
+  ret.Set(2, 2, -far / range);
+  ret.Set(2, 3, (far * near) / range);
+  ret.Set(3, 2, 1);
 
   return ret;
 }
