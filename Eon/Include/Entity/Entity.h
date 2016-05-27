@@ -7,7 +7,6 @@
 #include "Entity/Component.h"
 #include "Entity/Components/Components.h"
 
-// TODO: Use hash map for components
 namespace eon {
 namespace entity {
 class Entity {
@@ -16,6 +15,8 @@ public:
   void RemoveComponent(Component *component);
   bool HasComponent(ComponentType type);
   int NumComponents();
+
+  Component *GetComponent(ComponentType type);
 
 private:
   std::vector<Component *> components;

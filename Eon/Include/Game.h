@@ -2,19 +2,26 @@
 #define EON_GAME_H
 
 #include "Common.h"
+#include "Config.h"
 #include "Graphics/Renderer.h"
+#include "Mode.h"
 #include "Timer.h"
+
+using namespace eon::graphics;
 
 namespace eon {
 class Game {
 public:
-  Game(graphics::Renderer *gameRenderer);
+  Game(World *world, Mode *gameMode, Config *config);
+
+  inline Renderer *GetRenderer() { return &renderer; };
 
   int Start();
 
 private:
   Timer timer;
-  graphics::Renderer *renderer;
+  Renderer renderer;
+  Mode *mode;
 };
 }
 

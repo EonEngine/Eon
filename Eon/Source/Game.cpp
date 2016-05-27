@@ -4,11 +4,13 @@
 #include "Game.h"
 
 namespace eon {
-Game::Game(graphics::Renderer *gameRenderer) { renderer = gameRenderer; }
+Game::Game(World *world, Mode *gameMode, Config *config)
+    : renderer(world, config->windowTitle.c_str(), config->width,
+               config->height),
+      mode(gameMode) {}
 int Game::Start() {
   SDL_Event event;
   while (true) {
-    timer.Reset();
     while (SDL_PollEvent(&event)) {
 
       switch (event.type) {
@@ -20,8 +22,12 @@ int Game::Start() {
       }
       }
     }
-    renderer->Render();
-    std::cout << "FPS: " << 1000 / timer.GetMs() << "\r";
+
+    float ms = timer.GetMs();
+    timer.Reset();
+    mode->Update(ms);
+
+    renderer.Render();
   }
 }
 }

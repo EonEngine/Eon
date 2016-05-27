@@ -3,7 +3,7 @@
 
 namespace eon {
 namespace entity {
-enum ComponentType { DEFAULT, MESH_COMPONENT, TRANSFORM_COMPONENT };
+enum ComponentType { DEFAULT, RENDER_COMPONENT, TRANSFORM_COMPONENT };
 }
 }
 

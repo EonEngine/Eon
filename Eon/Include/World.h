@@ -12,6 +12,9 @@ public:
   void AddEntity(Entity *entity);
   void RemoveEntity(Entity *entity);
 
+  inline Entity *GetEntity(int i) { return entities[i]; };
+  inline int GetNumEntities() { return entities.size(); };
+
 private:
   std::vector<Entity *> entities;
 };

@@ -5,23 +5,24 @@
 #include <vector>
 
 #include "Common.h"
+#include "Entity/Components/Components.h"
+#include "Entity/Components/RenderComponent.h"
+#include "Entity/Components/TransformComponent.h"
 #include "Graphics/Color.h"
 #include "Graphics/Mesh.h"
 #include "Graphics/Shader.h"
 #include "Graphics/Texture.h"
 #include "Math/Mat4.h"
+#include "World.h"
 
 namespace eon {
 namespace graphics {
 class Renderer {
 public:
-  Renderer(const char *name, int width, int height);
+  Renderer(World *renderWorld, const char *name, int width, int height);
   ~Renderer();
 
   void Render();
-
-  void AddMesh(Mesh *mesh);
-  void RemoveMesh(Mesh *mesh);
 
   void SetBackgroundColor(Color color);
   Color GetBackgroundColor();
@@ -31,6 +32,8 @@ public:
   void SetTexture(Texture texture);
 
 private:
+  World *world;
+
   SDL_Window *window;
   Color bgColor;
 
@@ -39,6 +42,10 @@ private:
   GLuint currentShader;
 
   GLuint currentTexture;
+
+  GLuint modelLoc;
+  GLuint viewLoc;
+  GLint projLoc;
 
   Mat4 model;
   Mat4 view;
