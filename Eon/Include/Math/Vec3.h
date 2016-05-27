@@ -27,6 +27,7 @@ public:
   float Dot(Vec3 &other);
   Vec3 Cross(Vec3 &other);
   Vec3 Negate();
+  Vec3 Normalize();
 };
 }
 }

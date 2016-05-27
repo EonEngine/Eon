@@ -15,6 +15,7 @@ add_library(Eon
   Eon/Source/Entity/Component.cpp
   Eon/Source/Entity/Components/RenderComponent.cpp
   Eon/Source/Entity/Components/TransformComponent.cpp
+  Eon/Source/Graphics/Camera.cpp
   Eon/Source/Graphics/Color.cpp
   Eon/Source/Graphics/Mesh.cpp
   Eon/Source/Graphics/Renderer.cpp

@@ -52,5 +52,16 @@ Vec3 Vec3::Cross(Vec3 &other) {
 }
 
 Vec3 Vec3::Negate() { return Vec3(-x, -y, -z); }
+
+Vec3 Vec3::Normalize() {
+  Vec3 ret = *this;
+  float length = ret.Distance();
+
+  ret.x /= length;
+  ret.y /= length;
+  ret.z /= length;
+
+  return ret;
+}
 }
 }

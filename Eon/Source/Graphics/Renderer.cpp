@@ -49,10 +49,7 @@ void Renderer::Render() {
   glClearColor(bgColor.red, bgColor.green, bgColor.blue, bgColor.alpha);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-  glUniformMatrix4fv(viewLoc, 1, GL_FALSE, view.GetElements());
-  glUniformMatrix4fv(projLoc, 1, GL_FALSE, proj.GetElements());
-
-  glBindTexture(GL_TEXTURE_2D, currentTexture);
+  // glBindTexture(GL_TEXTURE_2D, currentTexture);
 
   for (int i = 0; i < world->GetNumEntities(); i++) {
     RenderComponent *render = dynamic_cast<RenderComponent *>(
@@ -61,16 +58,20 @@ void Renderer::Render() {
         world->GetEntity(i)->GetComponent(TRANSFORM_COMPONENT));
 
     if (render != NULL && transform != NULL) {
-      glUniformMatrix4fv(modelLoc, 1, GL_FALSE,
-                         transform->GetMatrix().GetElements());
+      render->GetShader()->Render();
 
-      std::cout << render->GetShader()->GetID();
-      glUseProgram(render->GetShader()->GetID());
+      glUniformMatrix4fv(render->GetShader()->GetModel(), 1, GL_FALSE,
+                         transform->GetMatrix().GetElements());
+      glUniformMatrix4fv(render->GetShader()->GetView(), 1, GL_FALSE,
+                         view.GetElements());
+      glUniformMatrix4fv(render->GetShader()->GetProj(), 1, GL_FALSE,
+                         proj.GetElements());
+
       render->GetMesh()->Render();
     }
   }
 
-  glBindTexture(GL_TEXTURE_2D, 0);
+  // glBindTexture(GL_TEXTURE_2D, 0);
 
   SDL_GL_SwapWindow(window);
 }
@@ -82,10 +83,6 @@ Color Renderer::GetBackgroundColor() { return bgColor; }
 void Renderer::SetShader(Shader shader) {
   glUseProgram(shader.GetID());
   currentShader = shader.GetID();
-
-  modelLoc = glGetUniformLocation(currentShader, "model");
-  viewLoc = glGetUniformLocation(currentShader, "view");
-  projLoc = glGetUniformLocation(currentShader, "proj");
 }
 
 void Renderer::SetTexture(Texture texture) { currentTexture = texture.GetID(); }

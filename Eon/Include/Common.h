@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 #include <math.h>
 
 #define GL_GLEXT_PROTOTYPES
