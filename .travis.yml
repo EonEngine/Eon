@@ -1,6 +1,12 @@
 language: cpp
 before_install:
   - sudo apt-get -qq update
-  - sudo apt-get install -y libsoil-dev libsdl2-dev
+  - sudo apt-get install -y libsoil-dev
+  - wget https://www.libsdl.org/release/SDL2-2.0.3.tar.gz
+  - tar xzf SDL2-2.0.3.tar.gz
+  - cd SDL2-2.0.3
+  - ./configure
+  - make
+  - sudo make install
 compiler: gcc
 script: make test

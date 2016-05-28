@@ -1,4 +1,5 @@
 # Eon
+[![Build Status](https://travis-ci.org/icebit/Eon.svg?branch=master)](https://travis-ci.org/icebit/Eon)
 
 Eon is an open-source game engine.
 
