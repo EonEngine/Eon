@@ -1,0 +1,6 @@
+language: cpp
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y libsoil-dev libsdl2-dev
+compiler: gcc
+script: make test

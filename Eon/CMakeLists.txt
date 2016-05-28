@@ -1,0 +1,22 @@
+include_directories(${SDL2_INCLUDE_DIR} ${SOIL_INCLUDE_DIRS} ${OPENGL_INCLUDE_DIR} Eon/Include)
+
+add_library(Eon
+  Source/Assets/Assets.cpp
+  Source/Entity/Entity.cpp
+  Source/Entity/Component.cpp
+  Source/Entity/Components/RenderComponent.cpp
+  Source/Entity/Components/TransformComponent.cpp
+  Source/Graphics/Camera.cpp
+  Source/Graphics/Color.cpp
+  Source/Graphics/Mesh.cpp
+  Source/Graphics/Renderer.cpp
+  Source/Graphics/Shader.cpp
+  Source/Graphics/Texture.cpp
+  Source/Graphics/Vertex.cpp
+  Source/Math/Mat4.cpp
+  Source/Math/Vec2.cpp
+  Source/Math/Vec3.cpp
+  Source/Math/Vec4.cpp
+  Source/Game.cpp
+  Source/Timer.cpp
+  Source/World.cpp)

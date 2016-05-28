@@ -72,34 +72,19 @@ int main() {
 
   Mesh mesh(verts, 36, true);
 
-  Texture textureTiles("Tiles.jpg");
-  Texture textureConcrete("Concrete.jpg");
-
+  Texture textureTiles("Concrete.jpg");
   Shader shader1(LoadText("Vertex.glsl").c_str(),
                  LoadText("Fragment.glsl").c_str());
   shader1.AddTexture(textureTiles, "texture1");
-  shader1.AddTexture(textureConcrete, "texture2");
-
-  Shader shader2(LoadText("Vertex.glsl").c_str(),
-                 LoadText("Fragment2.glsl").c_str());
-  shader2.AddTexture(textureTiles, "cTexture");
 
   // Add entities
   Entity entity1;
   RenderComponent rComponent1(&mesh, &shader1);
-  TransformComponent tComponent1(
-      Vec3(-1.0f, 0.0f, 0.0f), Vec3(0.8f, 0.8f, 0.8f), Vec3(0.0f, 0.0f, 0.0f));
+  TransformComponent tComponent1(Vec3(0.0f, 0.0f, 0.0f), Vec3(0.8f, 0.8f, 0.8f),
+                                 Vec3(0.0f, 0.0f, 0.0f));
   entity1.AddComponent(&tComponent1);
   entity1.AddComponent(&rComponent1);
   world.AddEntity(&entity1);
-
-  Entity entity2;
-  RenderComponent rComponent2(&mesh, &shader2);
-  TransformComponent tComponent2(Vec3(1.0f, 0.0f, 0.0f), Vec3(0.8f, 0.8f, 0.8f),
-                                 Vec3(0.0f, 0.0f, 0.0f));
-  entity2.AddComponent(&tComponent2);
-  entity2.AddComponent(&rComponent2);
-  world.AddEntity(&entity2);
 
   int result = game.Start();
   if (result != 0) {
