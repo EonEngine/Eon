@@ -1,5 +1,4 @@
-#include <SDL.h>
-
+#include "Common.h"
 #include "Eon.h"
 #include "Game.h"
 
@@ -9,19 +8,8 @@ Game::Game(World *world, Mode *gameMode, Config *config)
                config->height),
       mode(gameMode) {}
 int Game::Start() {
-  SDL_Event event;
-  while (true) {
-    while (SDL_PollEvent(&event)) {
-
-      switch (event.type) {
-      case SDL_QUIT: {
-        return 0;
-      }
-      case SDL_KEYDOWN: {
-        return 0;
-      }
-      }
-    }
+  while (!glfwWindowShouldClose(renderer.GetWindow())) {
+    glfwPollEvents();
 
     float ms = timer.GetMs();
     timer.Reset();
@@ -29,5 +17,6 @@ int Game::Start() {
 
     renderer.Render();
   }
+  return 0;
 }
 }

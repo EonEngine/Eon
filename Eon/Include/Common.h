@@ -6,8 +6,10 @@
 #include <vector>
 #include <math.h>
 
-#define GL_GLEXT_PROTOTYPES
-#include <GL/gl.h>
+#define GLEW_STATIC
+#include <GL/glew.h>
+
+#include <GLFW/glfw3.h>
 
 #include "Types.h"
 

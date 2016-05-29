@@ -9,15 +9,16 @@ Eon has only been tested on Linux as of now, but it should be able to generate V
 
 ### Prerequisites
 
-To build Eon on "*nix", you will need:
+To build Eon on "*nix", you will need the following dependencies:
 
 * `OpenGL` (this should be pre-installed on most systems)
 * `SOIL`
-* `SDL2`
+* `GLFW3`
+* `pkg-config`
 
 On Ubuntu, these can be installed by running
 
-`apt-get install libsoil-dev libsdl2-dev`
+`apt-get install libsoil-dev libglfw3-dev`
 
 Once you have installed these, navigate to the root project directory and run
 

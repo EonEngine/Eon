@@ -1,9 +1,9 @@
-#include <SDL.h>
-
 #include "Assets/Assets.h"
+#include "Common.h"
 #include "Eon.h"
 #include "Graphics/Renderer.h"
 #include "Graphics/Texture.h"
+#include <stdio.h>
 
 using namespace eon::assets;
 using namespace eon::math;
@@ -13,25 +13,23 @@ namespace graphics {
 
 Renderer::Renderer(World *renderWorld, const char *name, int width, int height)
     : world(renderWorld), bgColor(0, 0, 0, 1), model(0), view(0), proj(0) {
-  if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-    std::cout << "SDL Error: " << SDL_GetError() << std::endl;
-  }
+  glfwInit();
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+  glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-  window =
-      SDL_CreateWindow(name, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                       width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
-
+  window = glfwCreateWindow(width, height, name, NULL, NULL);
   if (window == NULL) {
-    std::cout << "SDL Window Error: " << SDL_GetError() << std::endl;
+    std::cout << "GLFW Error: Unable to create window" << std::endl;
+    glfwTerminate();
   }
+  glfwMakeContextCurrent(window);
 
-  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
-
-  SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-  SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
-
-  SDL_GLContext context = SDL_GL_CreateContext(window);
+  glewExperimental = GL_TRUE;
+  if (glewInit() != GLEW_OK) {
+    std::cout << "GLEW Error: Unable to initialize GLEW" << std::endl;
+  }
 
   std::cout << "OpenGL " << glGetString(GL_VERSION) << std::endl;
 
@@ -43,13 +41,11 @@ Renderer::Renderer(World *renderWorld, const char *name, int width, int height)
   proj = Mat4::Persp(M_PI / 2, (float)width / (float)height, 0.1, 100);
 }
 
-Renderer::~Renderer() { SDL_DestroyWindow(window); }
+Renderer::~Renderer() { glfwTerminate(); }
 
 void Renderer::Render() {
   glClearColor(bgColor.red, bgColor.green, bgColor.blue, bgColor.alpha);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-  // glBindTexture(GL_TEXTURE_2D, currentTexture);
 
   for (int i = 0; i < world->GetNumEntities(); i++) {
     RenderComponent *render = dynamic_cast<RenderComponent *>(
@@ -71,9 +67,7 @@ void Renderer::Render() {
     }
   }
 
-  // glBindTexture(GL_TEXTURE_2D, 0);
-
-  SDL_GL_SwapWindow(window);
+  glfwSwapBuffers(window);
 }
 
 void Renderer::SetBackgroundColor(Color color) { bgColor = color; }

@@ -1,4 +1,4 @@
-include_directories(${SDL2_INCLUDE_DIR} ${SOIL_INCLUDE_DIRS} ${OPENGL_INCLUDE_DIR} Eon/Include)
+include_directories(Eon/Include)
 
 add_library(Eon
   Source/Assets/Assets.cpp

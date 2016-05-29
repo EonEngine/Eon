@@ -1,7 +1,6 @@
 #ifndef EON_GRAPHICS_RENDERER_H
 #define EON_GRAPHICS_RENDERER_H
 
-#include <SDL.h>
 #include <vector>
 
 #include "Common.h"
@@ -27,6 +26,8 @@ public:
   void SetBackgroundColor(Color color);
   Color GetBackgroundColor();
 
+  inline GLFWwindow *GetWindow() { return window; };
+
   void SetShader(Shader shader);
 
   void SetTexture(Texture texture);
@@ -34,7 +35,8 @@ public:
 private:
   World *world;
 
-  SDL_Window *window;
+  GLFWwindow *window;
+
   Color bgColor;
 
   std::vector<Mesh *> meshes;
