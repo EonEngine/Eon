@@ -5,6 +5,7 @@
 
 #include "Common.h"
 #include "Entity/Components/TransformComponent.h"
+#include "Graphics/Camera.h"
 #include "Graphics/Material.h"
 #include "Graphics/Mesh.h"
 #include "Graphics/Shader.h"
@@ -25,6 +26,8 @@ public:
 
   void SetBackgroundColor(Vec4 color);
 
+  void SetCamera(Camera *viewCamera);
+
   inline GLFWwindow *GetWindow() { return window; };
 
   void Add(Mesh *mesh, Material *material, TransformComponent *transform);
@@ -38,14 +41,6 @@ private:
   std::vector<Mesh *> meshes;
   std::vector<Material *> materials;
   std::vector<TransformComponent *> transforms;
-
-  GLuint currentShader;
-
-  GLuint currentTexture;
-
-  GLuint modelLoc;
-  GLuint viewLoc;
-  GLint projLoc;
 
   Mat4 model;
   Mat4 view;

@@ -10,6 +10,8 @@ namespace eon {
 namespace graphics {
 class Camera {
 public:
+  Camera(Vec3 position, Vec3 lookAt, Vec3 up);
+
   Vec3 pos;
   Vec3 dir;
 

@@ -1,6 +1,14 @@
 #include "Common.h"
 #include "Game.h"
 
+#ifndef __linux__
+#include <unistd.h>
+#endif
+
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
 namespace eon {
 Game::Game(Config *config)
     : renderer(config->windowTitle.c_str(), config->width, config->height,
@@ -8,14 +16,31 @@ Game::Game(Config *config)
       world(&renderer) {}
 int Game::Start() {
   Init();
+
+  float sync = 0.016f;
+
+  float lastTime = glfwGetTime();
+
   while (!glfwWindowShouldClose(renderer.GetWindow())) {
-    glfwPollEvents();
+    float curTime = glfwGetTime();
+    float delta = curTime - lastTime;
 
-    float ms = timer.GetMs();
-    timer.Reset();
-    Tick(ms);
+    if (delta >= sync) {
+      glfwPollEvents();
 
-    renderer.Render();
+      lastTime = curTime;
+
+      Tick(delta * 1000);
+
+      renderer.Render();
+    } else {
+#ifndef __linux__
+      usleep((sync - delta) * 1000);
+#endif
+#ifdef _WIN32
+      Sleep(sync - delta);
+#endif
+    }
   }
   return 0;
 }

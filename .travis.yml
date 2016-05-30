@@ -1,7 +1,7 @@
 language: cpp
 before_install:
   - sudo apt-get -qq update
-  - sudo apt-get install -y libsoil-dev libglew-dev
+  - sudo apt-get install -y cmake libsoil-dev libglew-dev
   - wget https://github.com/glfw/glfw/releases/download/3.1.2/glfw-3.1.2.zip
   - unzip glfw-3.1.2.zip
   - cd glfw-3.1.2

@@ -18,5 +18,4 @@ add_library(Eon
   Source/Math/Vec3.cpp
   Source/Math/Vec4.cpp
   Source/Game.cpp
-  Source/Timer.cpp
   Source/World.cpp)
