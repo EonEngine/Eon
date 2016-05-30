@@ -1,6 +1,5 @@
 #include <vector>
 
-#include "Eon.h"
 #include "Graphics/Mesh.h"
 
 namespace eon {

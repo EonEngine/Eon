@@ -3,25 +3,7 @@
 
 #include <Eon.h>
 
-#include <Assets/Assets.h>
-#include <Config.h>
-#include <Entity/Component.h>
-#include <Entity/Components/Components.h>
-#include <Entity/Components/RenderComponent.h>
-#include <Entity/Components/TransformComponent.h>
-#include <Entity/Entity.h>
-#include <Graphics/Color.h>
-#include <Graphics/Mesh.h>
-#include <Graphics/Renderer.h>
-#include <Graphics/Texture.h>
-#include <Graphics/Vertex.h>
-#include <Math/Mat4.h>
-#include <Math/Vec2.h>
-#include <Math/Vec3.h>
-#include <Math/Vec4.h>
-#include <World.h>
-
-#include "GameMode.h"
+#include "SandboxGame.h"
 
 using namespace eon;
 using namespace eon::assets;
@@ -32,59 +14,14 @@ using namespace eon::math;
 int main() {
   std::cout << "Eon v" << EON_VERSION << " Sandbox" << std::endl;
 
-  // Mode
-  GameMode gameMode;
-
   // Config
   Config config;
   config.windowTitle = "Eon Sandbox";
   config.width = 1336;
   config.height = 768;
+  config.fullScreen = false;
 
-  World world;
-
-  Game game(&world, &gameMode, &config);
-
-  float verts[] = {
-      -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 0.5f,  -0.5f, -0.5f, 1.0f, 0.0f,
-      0.5f,  0.5f,  -0.5f, 1.0f, 1.0f, 0.5f,  0.5f,  -0.5f, 1.0f, 1.0f,
-      -0.5f, 0.5f,  -0.5f, 0.0f, 1.0f, -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
-
-      -0.5f, -0.5f, 0.5f,  0.0f, 0.0f, 0.5f,  -0.5f, 0.5f,  1.0f, 0.0f,
-      0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-      -0.5f, 0.5f,  0.5f,  0.0f, 1.0f, -0.5f, -0.5f, 0.5f,  0.0f, 0.0f,
-
-      -0.5f, 0.5f,  0.5f,  1.0f, 0.0f, -0.5f, 0.5f,  -0.5f, 1.0f, 1.0f,
-      -0.5f, -0.5f, -0.5f, 0.0f, 1.0f, -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-      -0.5f, -0.5f, 0.5f,  0.0f, 0.0f, -0.5f, 0.5f,  0.5f,  1.0f, 0.0f,
-
-      0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.5f,  0.5f,  -0.5f, 1.0f, 1.0f,
-      0.5f,  -0.5f, -0.5f, 0.0f, 1.0f, 0.5f,  -0.5f, -0.5f, 0.0f, 1.0f,
-      0.5f,  -0.5f, 0.5f,  0.0f, 0.0f, 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-
-      -0.5f, -0.5f, -0.5f, 0.0f, 1.0f, 0.5f,  -0.5f, -0.5f, 1.0f, 1.0f,
-      0.5f,  -0.5f, 0.5f,  1.0f, 0.0f, 0.5f,  -0.5f, 0.5f,  1.0f, 0.0f,
-      -0.5f, -0.5f, 0.5f,  0.0f, 0.0f, -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-
-      -0.5f, 0.5f,  -0.5f, 0.0f, 1.0f, 0.5f,  0.5f,  -0.5f, 1.0f, 1.0f,
-      0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-      -0.5f, 0.5f,  0.5f,  0.0f, 0.0f, -0.5f, 0.5f,  -0.5f, 0.0f, 1.0f};
-
-  Mesh mesh(verts, 36, true);
-
-  Texture textureTiles("Concrete.jpg");
-  Shader shader1(LoadText("Vertex.glsl").c_str(),
-                 LoadText("Fragment.glsl").c_str());
-  shader1.AddTexture(textureTiles, "texture1");
-
-  // Add entities
-  Entity entity1;
-  RenderComponent rComponent1(&mesh, &shader1);
-  TransformComponent tComponent1(Vec3(0.0f, 0.0f, 0.0f), Vec3(0.8f, 0.8f, 0.8f),
-                                 Vec3(0.0f, 0.0f, 0.0f));
-  entity1.AddComponent(&tComponent1);
-  entity1.AddComponent(&rComponent1);
-  world.AddEntity(&entity1);
+  SandboxGame game(&config);
 
   int result = game.Start();
   if (result != 0) {

@@ -1,22 +1,26 @@
 #include "Common.h"
-#include "Eon.h"
 #include "Game.h"
 
 namespace eon {
-Game::Game(World *world, Mode *gameMode, Config *config)
-    : renderer(world, config->windowTitle.c_str(), config->width,
-               config->height),
-      mode(gameMode) {}
+Game::Game(Config *config)
+    : renderer(config->windowTitle.c_str(), config->width, config->height,
+               config->fullScreen),
+      world(&renderer) {}
 int Game::Start() {
+  Init();
   while (!glfwWindowShouldClose(renderer.GetWindow())) {
     glfwPollEvents();
 
     float ms = timer.GetMs();
     timer.Reset();
-    mode->Update(ms);
+    Tick(ms);
 
     renderer.Render();
   }
   return 0;
 }
+
+void Game::Init() {}
+
+void Game::Tick(float delta) {}
 }

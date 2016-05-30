@@ -4,24 +4,30 @@
 #include "Common.h"
 #include "Config.h"
 #include "Graphics/Renderer.h"
-#include "Mode.h"
 #include "Timer.h"
+#include "World.h"
 
 using namespace eon::graphics;
 
 namespace eon {
 class Game {
 public:
-  Game(World *world, Mode *gameMode, Config *config);
+  Game(Config *config);
 
+  inline World *GetWorld() { return &world; };
   inline Renderer *GetRenderer() { return &renderer; };
 
   int Start();
 
+  virtual void Init();
+  virtual void Tick(float delta);
+
+protected:
+  Renderer renderer;
+  World world;
+
 private:
   Timer timer;
-  Renderer renderer;
-  Mode *mode;
 };
 }
 

@@ -1,7 +1,24 @@
+#include "Entity/Components/Components.h"
+#include "Entity/Components/RenderComponent.h"
+#include "Entity/Components/TransformComponent.h"
 #include "World.h"
 
 namespace eon {
-void World::AddEntity(Entity *entity) { entities.push_back(entity); }
+World::World(Renderer *worldRenderer) : renderer(worldRenderer) {}
+
+void World::AddEntity(Entity *entity) {
+  entities.push_back(entity);
+
+  // Check for RenderComponent and TransformComponent
+  RenderComponent *render =
+      dynamic_cast<RenderComponent *>(entity->GetComponent(RENDER_COMPONENT));
+  TransformComponent *transform = dynamic_cast<TransformComponent *>(
+      entity->GetComponent(TRANSFORM_COMPONENT));
+
+  if (render != NULL && transform != NULL) {
+    renderer->Add(render->GetMesh(), render->GetMaterial(), transform);
+  }
+}
 void World::RemoveEntity(Entity *entity) {
   for (int i; i < entities.size(); i++) {
     if (entities[i] == entity) {

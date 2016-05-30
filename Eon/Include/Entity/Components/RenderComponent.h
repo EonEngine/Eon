@@ -4,8 +4,8 @@
 #include "Common.h"
 #include "Entity/Component.h"
 #include "Entity/Components/Components.h"
+#include "Graphics/Material.h"
 #include "Graphics/Mesh.h"
-#include "Graphics/Shader.h"
 
 using namespace eon::graphics;
 
@@ -13,16 +13,16 @@ namespace eon {
 namespace entity {
 class RenderComponent : public Component {
 public:
-  RenderComponent(Mesh *mesh, Shader *shader);
+  RenderComponent(Mesh *renderMesh, Material *renderMaterial);
 
-  inline Mesh *GetMesh() { return m; };
-  inline Shader *GetShader() { return s; };
+  inline Mesh *GetMesh() { return mesh; };
+  inline Material *GetMaterial() { return material; };
 
   virtual ComponentType GetType() { return RENDER_COMPONENT; };
 
 private:
-  Mesh *m;
-  Shader *s;
+  Mesh *mesh;
+  Material *material;
 };
 }
 }

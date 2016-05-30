@@ -8,6 +8,7 @@ class Config {
 public:
   int width, height;
   std::string windowTitle;
+  bool fullScreen;
 };
 }
 

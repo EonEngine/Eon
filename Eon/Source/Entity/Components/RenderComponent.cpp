@@ -2,7 +2,7 @@
 
 namespace eon {
 namespace entity {
-RenderComponent::RenderComponent(Mesh *mesh, Shader *shader)
-    : m(mesh), s(shader) {}
+RenderComponent::RenderComponent(Mesh *renderMesh, Material *renderMaterial)
+    : mesh(renderMesh), material(renderMaterial) {}
 }
 }

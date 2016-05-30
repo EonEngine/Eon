@@ -60,19 +60,5 @@ Shader::Shader(const char *vertexSrc, const char *fragSrc) {
   view = glGetUniformLocation(id, "view");
   proj = glGetUniformLocation(id, "proj");
 }
-
-void Shader::Render() {
-  glUseProgram(id);
-  for (int i = 0; i < textures.size(); i++) {
-    glActiveTexture(GL_TEXTURE0 + i);
-    glBindTexture(GL_TEXTURE_2D, textures[i].GetID());
-    glUniform1i(textureLocs[i], i);
-  }
-}
-
-void Shader::AddTexture(Texture texture, const char *name) {
-  textures.push_back(texture);
-  textureLocs.push_back(glGetUniformLocation(id, name));
-}
 }
 }

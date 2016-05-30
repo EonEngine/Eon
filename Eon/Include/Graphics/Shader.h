@@ -10,10 +10,6 @@ class Shader {
 public:
   Shader(const char *vertexSrc, const char *fragSrc);
 
-  void Render();
-
-  void AddTexture(Texture texture, const char *name);
-
   inline GLuint GetID() { return id; };
 
   inline GLuint GetModel() { return model; };
@@ -26,9 +22,6 @@ private:
   GLuint model;
   GLuint view;
   GLuint proj;
-
-  std::vector<Texture> textures;
-  std::vector<GLuint> textureLocs;
 };
 }
 }

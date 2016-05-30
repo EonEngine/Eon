@@ -1,5 +1,4 @@
 #include "Entity/Entity.h"
-#include "Eon.h"
 
 namespace eon {
 namespace entity {
