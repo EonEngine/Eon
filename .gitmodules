@@ -1,3 +1,6 @@
 [submodule "Deps"]
 	path = Deps
 	url = https://github.com/EonEngine/Deps
+[submodule "glfw"]
+	path = glfw
+	url = https://github.com/glfw/glfw.git
