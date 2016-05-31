@@ -13,7 +13,8 @@ namespace graphics {
 
 Renderer::Renderer(const char *name, int width, int height, bool fullScreen)
     : bgColor(0.0f, 0.0f, 0.0f, 1.0f), model(0.0f), view(0.0f), proj(0.0f) {
-  glfwInit();
+  
+	glfwInit();
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -36,7 +37,7 @@ Renderer::Renderer(const char *name, int width, int height, bool fullScreen)
     std::cout << "GLEW Error: Unable to initialize GLEW" << std::endl;
   }
 
-  std::cout << "OpenGL " << glGetString(GL_VERSION) << std::endl;
+  //std::cout << "OpenGL " << glGetString(GL_VERSION) << std::endl;
 
   glViewport(0, 0, width, height);
   glEnable(GL_DEPTH_TEST);
