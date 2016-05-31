@@ -11,6 +11,7 @@
 #include <Entity/Components/TransformComponent.h>
 #include <Entity/Entity.h>
 #include <Game.h>
+#include <Graphics/Camera.h>
 #include <Graphics/Material.h>
 #include <Graphics/Mesh.h>
 #include <Graphics/Renderer.h>

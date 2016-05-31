@@ -10,12 +10,13 @@ namespace eon {
 namespace graphics {
 class Camera {
 public:
-  Camera(Vec3 position, Vec3 lookAt, Vec3 up);
+  Camera(Vec3 position, Vec3 target, Vec3 upVec);
 
+  Vec3 right;
+  Vec3 up;
+  Vec3 worldUp;
   Vec3 pos;
   Vec3 dir;
-
-  void LookAt(Vec3 pos);
 
   Mat4 GetMatrix();
 };

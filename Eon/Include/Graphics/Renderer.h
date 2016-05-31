@@ -36,6 +36,8 @@ public:
 private:
   GLFWwindow *window;
 
+  Camera *camera;
+
   Vec4 bgColor;
 
   std::vector<Mesh *> meshes;

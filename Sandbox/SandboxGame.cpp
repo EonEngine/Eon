@@ -35,7 +35,7 @@ void SandboxGame::Init() {
                                             LoadText("Fragment.glsl").c_str()));
   material1->AddTexture(textureTiles, "texture1");
 
-  // Add entities
+  // Add entity
   Entity *entity1 = new Entity();
   RenderComponent *rComponent1 = new RenderComponent(mesh, material1);
   TransformComponent *tComponent1 = new TransformComponent(
@@ -43,6 +43,12 @@ void SandboxGame::Init() {
   entity1->AddComponent(tComponent1);
   entity1->AddComponent(rComponent1);
   world.AddEntity(entity1);
+
+  // Set up camera
+  Camera *cam = new Camera(Vec3(0.0f, 0.0f, -3.0f), Vec3(0.0f, 0.0f, 0.0f),
+                           Vec3(0.0f, 1.0f, 0.0f));
+
+  renderer.SetCamera(cam);
 
   renderer.SetBackgroundColor(Vec4(0.1f, 0.1f, 0.1f, 1.0f));
 }

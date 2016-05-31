@@ -56,9 +56,29 @@ Shader::Shader(const char *vertexSrc, const char *fragSrc) {
   glDeleteShader(vertexId);
   glDeleteShader(fragId);
 
-  model = glGetUniformLocation(id, "model");
-  view = glGetUniformLocation(id, "view");
-  proj = glGetUniformLocation(id, "proj");
+  model = glGetUniformLocation(id, "s_modelM");
+  if (model == -1) {
+    std::cout << "OpenGL Shader Error: Required system mat4 uniform "
+                 "s_modelM not found in shader"
+              << std::endl;
+    id = 0;
+  }
+
+  view = glGetUniformLocation(id, "s_viewM");
+  if (view == -1) {
+    std::cout << "OpenGL Shader Error: Required system mat4 uniform "
+                 "s_viewM not found in shader"
+              << std::endl;
+    id = 0;
+  }
+
+  proj = glGetUniformLocation(id, "s_projM");
+  if (proj == -1) {
+    std::cout << "OpenGL Shader Error: Required system mat4 uniform "
+                 "s_projM not found in shader"
+              << std::endl;
+    id = 0;
+  }
 }
 }
 }

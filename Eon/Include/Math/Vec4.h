@@ -7,6 +7,7 @@ namespace eon {
 namespace math {
 class Vec4 {
 public:
+  Vec4();
   Vec4(float xCoord, float yCoord, float zCoord, float wCoord);
 
   float x, y, z, w;

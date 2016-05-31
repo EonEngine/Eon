@@ -24,6 +24,8 @@ public:
   static Mat4 RotateY(float radians);
   static Mat4 RotateZ(float radians);
 
+  static Mat4 LookAt(Vec3 right, Vec3 up, Vec3 dir, Vec3 pos);
+
   static Mat4 Ortho(float left, float right, float bottom, float top,
                     float near, float far);
   static Mat4 Persp(float fov, float aspectRatio, float near, float far);

@@ -51,6 +51,8 @@ void Renderer::Render() {
   glClearColor(bgColor.x, bgColor.y, bgColor.z, bgColor.w);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+  // view = camera->GetMatrix();
+
   for (int i = 0; i < meshes.size(); i++) {
     materials[i]->Bind();
 
@@ -67,6 +69,11 @@ void Renderer::Render() {
   }
 
   glfwSwapBuffers(window);
+}
+
+void Renderer::SetCamera(Camera *viewCamera) {
+  camera = viewCamera;
+  // view = camera->GetMatrix();
 }
 
 void Renderer::Add(Mesh *mesh, Material *material,

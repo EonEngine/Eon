@@ -15,7 +15,7 @@ Mat4::Mat4(float diagonal) {
 }
 
 Mat4 Mat4::operator*(Mat4 &other) {
-  Mat4 ret(0);
+  Mat4 ret(0.0f);
   for (int i = 0; i < 4; i++) {
     for (int j = 0; j < 4; j++) {
       float sum = 0;
@@ -29,7 +29,7 @@ Mat4 Mat4::operator*(Mat4 &other) {
 }
 
 Vec4 Mat4::operator*(Vec4 &other) {
-  Vec4 ret(0, 0, 0, 0);
+  Vec4 ret(0.0f, 0.0f, 0.0f, 0.0f);
   for (int i = 0; i < 4; i++) {
     float sum = 0;
     sum += Get(i, 0) * other.x;
@@ -53,7 +53,7 @@ Vec4 Mat4::operator*(Vec4 &other) {
 void Mat4::operator*=(Mat4 &other) { *this = *this * other; }
 
 Mat4 Mat4::Translate(Vec3 delta) {
-  Mat4 ret(1);
+  Mat4 ret(1.0f);
 
   ret.Set(0, 3, delta.x);
   ret.Set(1, 3, delta.y);
@@ -63,7 +63,7 @@ Mat4 Mat4::Translate(Vec3 delta) {
 }
 
 Mat4 Mat4::RotateX(float radians) {
-  Mat4 ret(1);
+  Mat4 ret(1.0f);
 
   ret.Set(1, 1, cos(radians));
   ret.Set(1, 2, -sin(radians));
@@ -74,7 +74,7 @@ Mat4 Mat4::RotateX(float radians) {
 }
 
 Mat4 Mat4::RotateY(float radians) {
-  Mat4 ret(1);
+  Mat4 ret(1.0f);
 
   ret.Set(0, 0, cos(radians));
   ret.Set(0, 2, sin(radians));
@@ -85,7 +85,7 @@ Mat4 Mat4::RotateY(float radians) {
 }
 
 Mat4 Mat4::RotateZ(float radians) {
-  Mat4 ret(1);
+  Mat4 ret(1.0f);
 
   ret.Set(0, 0, cos(radians));
   ret.Set(0, 1, -sin(radians));
@@ -95,9 +95,30 @@ Mat4 Mat4::RotateZ(float radians) {
   return ret;
 }
 
+Mat4 Mat4::LookAt(Vec3 right, Vec3 up, Vec3 dir, Vec3 pos) {
+  Mat4 mat1(1.0f);
+  Mat4 mat2(1.0f);
+
+  mat1.Set(0, 0, right.x);
+  mat1.Set(0, 1, right.y);
+  mat1.Set(0, 2, right.z);
+  mat1.Set(1, 0, up.x);
+  mat1.Set(1, 1, up.y);
+  mat1.Set(1, 2, up.z);
+  mat1.Set(2, 0, dir.x);
+  mat1.Set(2, 1, dir.y);
+  mat1.Set(2, 2, dir.z);
+
+  mat2.Set(0, 3, -pos.x);
+  mat2.Set(1, 3, -pos.y);
+  mat2.Set(2, 3, -pos.z);
+
+  return mat1 * mat2;
+}
+
 Mat4 Mat4::Ortho(float left, float right, float bottom, float top, float near,
                  float far) {
-  Mat4 ret(1);
+  Mat4 ret(1.0f);
 
   ret.Set(0, 0, 2 / (right - left));
   ret.Set(1, 1, 2 / (top - bottom));
@@ -111,7 +132,7 @@ Mat4 Mat4::Ortho(float left, float right, float bottom, float top, float near,
 }
 
 Mat4 Mat4::Persp(float fov, float aspectRatio, float near, float far) {
-  Mat4 ret(0);
+  Mat4 ret(0.0f);
 
   float range = near - far;
   float tanHalfFov = tan(fov / 2);

@@ -4,6 +4,11 @@
 
 namespace eon {
 namespace math {
+Vec2::Vec2() {
+  x = 0.0f;
+  y = 0.0f;
+}
+
 Vec2::Vec2(float xCoord, float yCoord) {
   x = xCoord;
   y = yCoord;
