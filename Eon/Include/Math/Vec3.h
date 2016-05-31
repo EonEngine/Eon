@@ -27,6 +27,7 @@ public:
   Vec3 Cross(Vec3 &other);
   Vec3 Negate();
   Vec3 Normalize();
+  static Vec3 Normalize(Vec3 vec);
 };
 }
 }

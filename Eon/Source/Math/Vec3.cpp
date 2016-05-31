@@ -1,5 +1,5 @@
-#include <math.h>
 #include "Common.h"
+#include <math.h>
 
 #include "Math/Vec3.h"
 
@@ -69,6 +69,16 @@ Vec3 Vec3::Normalize() {
   ret.z /= length;
 
   return ret;
+}
+
+Vec3 Vec3::Normalize(Vec3 vec) {
+  float length = vec.Distance();
+
+  vec.x /= length;
+  vec.y /= length;
+  vec.z /= length;
+
+  return vec;
 }
 }
 }

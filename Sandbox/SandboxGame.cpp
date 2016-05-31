@@ -45,7 +45,7 @@ void SandboxGame::Init() {
   world.AddEntity(entity1);
 
   // Set up camera
-  Camera *cam = new Camera(Vec3(0.0f, 0.0f, -3.0f), Vec3(0.0f, 0.0f, 0.0f),
+  Camera *cam = new Camera(Vec3(2.0f, 2.0f, 2.0f), Vec3(0.0f, 0.0f, 0.0f),
                            Vec3(0.0f, 1.0f, 0.0f));
 
   renderer.SetCamera(cam);
