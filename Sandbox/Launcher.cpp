@@ -22,8 +22,8 @@ int main() {
   config.fullScreen = false;
 
   SandboxGame game(&config);
-  
-  int result = 0;
+
+  int result = game.Start();
   if (result != 0) {
     std::cout << "Eon Sandbox was stopped due to an internal error"
               << std::endl;

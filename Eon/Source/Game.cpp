@@ -2,7 +2,7 @@
 
 #include "Game.h"
 
-#ifndef _WIN32
+#ifdef _WIN32
 #include <windows.h>
 #elif __linux__
 #include <unistd.h>
@@ -33,10 +33,10 @@ int Game::Start() {
 
       renderer.Render();
     } else {
-#ifndef _WIN32
-		Sleep(sync - delta);
+#ifdef _WIN32
+      Sleep(sync - delta);
 #elif __linux__
-		usleep((sync - delta) * 1000);
+      usleep((sync - delta) * 1000);
 #endif
     }
   }
