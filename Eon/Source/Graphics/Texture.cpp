@@ -1,5 +1,6 @@
-#include "Assets/Assets.h"
 #include "Common.h"
+
+#include "Assets/Assets.h"
 #include "Graphics/Texture.h"
 
 using namespace eon::assets;

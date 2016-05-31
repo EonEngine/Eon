@@ -1,7 +1,6 @@
 #ifndef EON_ENTITY_COMPONENTS_RENDERCOMPONENT_H
 #define EON_ENTITY_COMPONENTS_RENDERCOMPONENT_H
 
-#include "Common.h"
 #include "Entity/Component.h"
 #include "Entity/Components/Components.h"
 #include "Graphics/Material.h"

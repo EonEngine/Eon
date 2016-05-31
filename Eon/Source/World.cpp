@@ -1,3 +1,5 @@
+#include "Common.h"
+
 #include "Entity/Components/Components.h"
 #include "Entity/Components/RenderComponent.h"
 #include "Entity/Components/TransformComponent.h"

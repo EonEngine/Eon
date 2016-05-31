@@ -3,7 +3,6 @@
 
 #include <vector>
 
-#include "Common.h"
 #include "Entity/Components/TransformComponent.h"
 #include "Graphics/Camera.h"
 #include "Graphics/Material.h"

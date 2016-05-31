@@ -12,5 +12,6 @@
 #include <GLFW/glfw3.h>
 
 #include "Types.h"
+#include "Math/Math.h"
 
 #endif

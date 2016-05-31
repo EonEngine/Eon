@@ -1,3 +1,5 @@
+#include "Common.h"
+
 #include "Graphics/Material.h"
 
 namespace eon {

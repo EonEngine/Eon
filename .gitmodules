@@ -1,0 +1,3 @@
+[submodule "Deps"]
+	path = Deps
+	url = https://github.com/EonEngine/Deps

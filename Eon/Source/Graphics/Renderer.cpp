@@ -1,5 +1,6 @@
-#include "Assets/Assets.h"
 #include "Common.h"
+
+#include "Assets/Assets.h"
 #include "Graphics/Renderer.h"
 #include "Graphics/Texture.h"
 #include <stdio.h>
@@ -12,7 +13,8 @@ namespace graphics {
 
 Renderer::Renderer(const char *name, int width, int height, bool fullScreen)
     : bgColor(0.0f, 0.0f, 0.0f, 1.0f), model(0.0f), view(0.0f), proj(0.0f) {
-  glfwInit();
+  
+	glfwInit();
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -35,14 +37,14 @@ Renderer::Renderer(const char *name, int width, int height, bool fullScreen)
     std::cout << "GLEW Error: Unable to initialize GLEW" << std::endl;
   }
 
-  std::cout << "OpenGL " << glGetString(GL_VERSION) << std::endl;
+  //std::cout << "OpenGL " << glGetString(GL_VERSION) << std::endl;
 
   glViewport(0, 0, width, height);
   glEnable(GL_DEPTH_TEST);
 
   model = Mat4(1.0f);
   view = Mat4::Translate(Vec3(0, -0.5f, 1.5f));
-  proj = Mat4::Persp(M_PI / 2.0f, (float)width / (float)height, 0.1f, 100.0f);
+  proj = Mat4::Persp(PI / 2.0f, (float)width / (float)height, 0.1f, 100.0f);
 }
 
 Renderer::~Renderer() { glfwTerminate(); }

@@ -1,8 +1,6 @@
 #ifndef EON_MATH_VEC4_H
 #define EON_MATH_VEC4_H
 
-#include "Common.h"
-
 namespace eon {
 namespace math {
 class Vec4 {

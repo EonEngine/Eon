@@ -1,4 +1,5 @@
 #include "Common.h"
+
 #include "Graphics/Shader.h"
 
 namespace eon {

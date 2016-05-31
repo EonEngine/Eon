@@ -1,7 +1,6 @@
 #ifndef EON_GRAPHICS_SHADER_H
 #define EON_GRAPHICS_SHADER_H
 
-#include "Common.h"
 #include "Graphics/Texture.h"
 
 namespace eon {

@@ -1,3 +1,5 @@
+#include "Common.h"
+
 #include "Entity/Entity.h"
 
 namespace eon {

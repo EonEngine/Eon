@@ -1,4 +1,5 @@
 #include "Common.h"
+
 #include "Graphics/Vertex.h"
 
 namespace eon {
