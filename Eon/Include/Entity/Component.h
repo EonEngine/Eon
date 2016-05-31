@@ -1,7 +1,6 @@
 #ifndef EON_ENTITY_COMPONENT_H
 #define EON_ENTITY_COMPONENT_H
 
-#include "Common.h"
 #include "Entity/Components/Components.h"
 
 namespace eon {

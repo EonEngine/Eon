@@ -3,6 +3,8 @@
 
 #define EON_VERSION "0.0.20"
 
+#include <Common.h>
+
 #include <Assets/Assets.h>
 #include <Config.h>
 #include <Entity/Component.h>

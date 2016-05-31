@@ -1,3 +1,5 @@
+#include "Common.h"
+
 #include "Entity/Components/TransformComponent.h"
 
 namespace eon {

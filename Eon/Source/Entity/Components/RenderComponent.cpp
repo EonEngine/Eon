@@ -1,3 +1,5 @@
+#include "Common.h"
+
 #include "Entity/Components/RenderComponent.h"
 
 namespace eon {

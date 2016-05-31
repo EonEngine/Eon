@@ -1,7 +1,6 @@
 #ifndef EON_GAME_H
 #define EON_GAME_H
 
-#include "Common.h"
 #include "Config.h"
 #include "Graphics/Renderer.h"
 #include "World.h"

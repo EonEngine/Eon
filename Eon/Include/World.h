@@ -1,7 +1,6 @@
 #ifndef EON_WORLD_H
 #define EON_WORLD_H
 
-#include "Common.h"
 #include "Entity/Entity.h"
 #include "Graphics/Renderer.h"
 

@@ -3,7 +3,6 @@
 
 #include <vector>
 
-#include "Common.h"
 #include "Graphics/Vertex.h"
 #include "Math/Vec2.h"
 #include "Math/Vec3.h"

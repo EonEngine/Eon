@@ -1,5 +1,6 @@
-#include "Assets/Assets.h"
 #include "Common.h"
+
+#include "Assets/Assets.h"
 #include "Graphics/Renderer.h"
 #include "Graphics/Texture.h"
 #include <stdio.h>
@@ -42,7 +43,7 @@ Renderer::Renderer(const char *name, int width, int height, bool fullScreen)
 
   model = Mat4(1.0f);
   view = Mat4::Translate(Vec3(0, -0.5f, 1.5f));
-  proj = Mat4::Persp(M_PI / 2.0f, (float)width / (float)height, 0.1f, 100.0f);
+  proj = Mat4::Persp(PI / 2.0f, (float)width / (float)height, 0.1f, 100.0f);
 }
 
 Renderer::~Renderer() { glfwTerminate(); }

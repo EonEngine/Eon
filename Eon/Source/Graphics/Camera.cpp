@@ -1,3 +1,5 @@
+#include "Common.h"
+
 #include "Graphics/Camera.h"
 
 namespace eon {

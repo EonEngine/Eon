@@ -1,12 +1,11 @@
 #include "Common.h"
+
 #include "Game.h"
 
-#ifndef __linux__
-#include <unistd.h>
-#endif
-
-#ifdef _WIN32
+#ifndef _WIN32
 #include <windows.h>
+#elif __linux__
+#include <unistd.h>
 #endif
 
 namespace eon {
@@ -34,11 +33,10 @@ int Game::Start() {
 
       renderer.Render();
     } else {
-#ifndef __linux__
-      usleep((sync - delta) * 1000);
-#endif
-#ifdef _WIN32
-      Sleep(sync - delta);
+#ifndef _WIN32
+		Sleep(sync - delta);
+#elif __linux__
+		usleep((sync - delta) * 1000);
 #endif
     }
   }

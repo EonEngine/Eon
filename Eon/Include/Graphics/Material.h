@@ -1,7 +1,6 @@
 #ifndef EON_GRAPHICS_MATERIAL_H
 #define EON_GRAPHICS_MATERIAL_H
 
-#include "Common.h"
 #include "Graphics/Shader.h"
 #include "Graphics/Texture.h"
 

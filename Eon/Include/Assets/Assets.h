@@ -1,8 +1,6 @@
 #ifndef EON_ASSETS_H
 #define EON_ASSETS_H
 
-#include "Common.h"
-
 namespace eon {
 namespace assets {
 std::string LoadText(const char *name);
