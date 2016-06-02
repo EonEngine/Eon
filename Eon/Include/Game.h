@@ -3,6 +3,7 @@
 
 #include "Config.h"
 #include "Graphics/Renderer.h"
+#include "Input.h"
 #include "World.h"
 
 using namespace eon::graphics;
@@ -23,6 +24,7 @@ public:
 protected:
   Renderer renderer;
   World world;
+  Input input;
 };
 }
 

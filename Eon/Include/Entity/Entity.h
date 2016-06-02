@@ -12,10 +12,13 @@ class Entity {
 public:
   void AddComponent(Component *component);
   void RemoveComponent(Component *component);
+
   bool HasComponent(ComponentType type);
   int NumComponents();
-
   Component *GetComponent(ComponentType type);
+
+  virtual void Init();
+  virtual void Tick(float delta);
 
 private:
   std::vector<Component *> components;

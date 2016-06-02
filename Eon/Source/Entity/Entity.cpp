@@ -15,7 +15,7 @@ void Entity::AddComponent(Component *component) {
 }
 
 void Entity::RemoveComponent(Component *component) {
-  for (int i; i < components.size(); i++) {
+  for (int i = 0; i < components.size(); i++) {
     if (components[i] == component) {
       components.erase(components.begin() + i);
       break;
@@ -24,7 +24,7 @@ void Entity::RemoveComponent(Component *component) {
 }
 
 bool Entity::HasComponent(ComponentType type) {
-  for (int i; i < components.size(); i++) {
+  for (int i = 0; i < components.size(); i++) {
     if (components[i]->GetType() == type) {
       return true;
     }
@@ -35,12 +35,15 @@ bool Entity::HasComponent(ComponentType type) {
 int Entity::NumComponents() { return components.size(); }
 
 Component *Entity::GetComponent(ComponentType type) {
-  for (int i; i < components.size(); i++) {
+  for (int i = 0; i < components.size(); i++) {
     if (components[i]->GetType() == type) {
       return components[i];
     }
   }
   return NULL;
 }
+
+void Entity::Init() {}
+void Entity::Tick(float delta) {}
 }
 }

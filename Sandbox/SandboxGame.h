@@ -4,6 +4,10 @@
 #include <Eon.h>
 #include <Game.h>
 
+#include "FPSCamera.h"
+
+#include "Entity/Components/Components.h"
+
 using namespace eon;
 
 class SandboxGame : public Game {
@@ -12,6 +16,13 @@ public:
 
   virtual void Init();
   virtual void Tick(float delta);
+
+private:
+  Camera camera;
+  FPSCamera fpsCamera;
+
+  float yaw;
+  float pitch;
 };
 
 #endif

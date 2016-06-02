@@ -12,33 +12,24 @@ namespace eon {
 Game::Game(Config *config)
     : renderer(config->windowTitle.c_str(), config->width, config->height,
                config->fullScreen),
-      world(&renderer) {}
+      world(&renderer), input(renderer.GetWindow()) {}
 int Game::Start() {
   Init();
-
-  float sync = 0.016f;
 
   float lastTime = glfwGetTime();
 
   while (!glfwWindowShouldClose(renderer.GetWindow())) {
     float curTime = glfwGetTime();
     float delta = curTime - lastTime;
+    glfwPollEvents();
+    input.Update();
 
-    if (delta >= sync) {
-      glfwPollEvents();
+    lastTime = curTime;
 
-      lastTime = curTime;
+    Tick(delta * 1000);
+    world.Tick(delta * 1000);
 
-      Tick(delta * 1000);
-
-      renderer.Render();
-    } else {
-#ifdef _WIN32
-      Sleep(sync - delta);
-#elif __linux__
-      usleep((sync - delta) * 1000);
-#endif
-    }
+    renderer.Render();
   }
   return 0;
 }

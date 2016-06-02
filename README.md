@@ -1,5 +1,5 @@
 # Eon
-[![Build Status](https://travis-ci.org/icebit/Eon.svg?branch=master)](https://travis-ci.org/icebit/Eon)
+[![Build Status](https://travis-ci.org/EonEngine/Eon.svg?branch=master)](https://travis-ci.org/EonEngine/Eon)
 
 Eon is an open-source game engine.
 
@@ -13,12 +13,12 @@ To build Eon on "*nix", you will need the following dependencies:
 
 * `OpenGL` (this should be pre-installed on most systems)
 * `SOIL`
-* `GLFW3`
-* `pkg-config`
+* `GLEW`
+* `GLFW`
 
-On Ubuntu, these can be installed by running
+`GLFW` will be build along with the engine. On Ubuntu, the other dependencies can be installed by running
 
-`apt-get install libsoil-dev libglfw3-dev`
+`apt-get install libsoil-dev libglew-dev`
 
 Once you have installed these, navigate to the root project directory and run
 

@@ -14,6 +14,12 @@ Camera::Camera(Vec3 camPos, Vec3 targetPos, Vec3 worldUpVec) {
   up = dir.Cross(right);
 }
 
+void Camera::Update() {
+  dir = Vec3::Normalize(pos - target);
+  right = Vec3::Normalize(worldUp.Cross(dir));
+  up = dir.Cross(right);
+}
+
 Mat4 Camera::GetMatrix() {
   Mat4 mat(1.0f);
   Mat4 translation(1.0f);

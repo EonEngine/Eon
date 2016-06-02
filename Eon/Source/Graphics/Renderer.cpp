@@ -32,6 +32,8 @@ Renderer::Renderer(const char *name, int width, int height, bool fullScreen)
   }
   glfwMakeContextCurrent(window);
 
+  glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
   glewExperimental = GL_TRUE;
   if (glewInit() != GLEW_OK) {
     std::cout << "GLEW Error: Unable to initialize GLEW" << std::endl;
@@ -44,7 +46,7 @@ Renderer::Renderer(const char *name, int width, int height, bool fullScreen)
 
   model = Mat4(1.0f);
   view = Mat4::Translate(Vec3(0, -0.5f, 1.5f));
-  proj = Mat4::Persp(PI / 3.0f, (float)width / (float)height, 0.1f, 100.0f);
+  proj = Mat4::Persp(PI / 2.5f, (float)width / (float)height, 0.1f, 100.0f);
 }
 
 Renderer::~Renderer() { glfwTerminate(); }
@@ -53,6 +55,7 @@ void Renderer::Render() {
   glClearColor(bgColor.x, bgColor.y, bgColor.z, bgColor.w);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+  camera->Update();
   view = camera->GetMatrix();
 
   for (int i = 0; i < meshes.size(); i++) {
@@ -83,7 +86,7 @@ void Renderer::Add(Mesh *mesh, Material *material,
 }
 
 void Renderer::Remove(Mesh *mesh) {
-  for (int i; i < meshes.size(); i++) {
+  for (int i = 0; i < meshes.size(); i++) {
     if (meshes[i] == mesh) {
       meshes.erase(meshes.begin() + i);
       materials.erase(materials.begin() + i);

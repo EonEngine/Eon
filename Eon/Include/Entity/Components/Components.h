@@ -3,7 +3,12 @@
 
 namespace eon {
 namespace entity {
-enum ComponentType { DEFAULT, RENDER_COMPONENT, TRANSFORM_COMPONENT };
+enum ComponentType {
+  DEFAULT,
+  RENDER_COMPONENT,
+  TRANSFORM_COMPONENT,
+  CAMERA_COMPONENT
+};
 }
 }
 

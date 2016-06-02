@@ -17,8 +17,8 @@ int main() {
   // Config
   Config config;
   config.windowTitle = "Eon Sandbox";
-  config.width = 1336;
-  config.height = 768;
+  config.width = 640;
+  config.height = 480;
   config.fullScreen = false;
 
   SandboxGame game(&config);

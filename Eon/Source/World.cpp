@@ -20,13 +20,20 @@ void World::AddEntity(Entity *entity) {
   if (render != NULL && transform != NULL) {
     renderer->Add(render->GetMesh(), render->GetMaterial(), transform);
   }
+
+  entity->Init();
 }
 void World::RemoveEntity(Entity *entity) {
-  for (int i; i < entities.size(); i++) {
+  for (int i = 0; i < entities.size(); i++) {
     if (entities[i] == entity) {
       entities.erase(entities.begin() + i);
       break;
     }
+  }
+}
+void World::Tick(float delta) {
+  for (int i = 0; i < entities.size(); i++) {
+    entities[i]->Tick(delta);
   }
 }
 }

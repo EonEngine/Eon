@@ -19,6 +19,8 @@ public:
   Vec3 pos;
   Vec3 dir;
 
+  void Update();
+
   Mat4 GetMatrix();
 };
 }

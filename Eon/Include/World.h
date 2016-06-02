@@ -18,6 +18,8 @@ public:
   inline Entity *GetEntity(int i) { return entities[i]; };
   inline int GetNumEntities() { return entities.size(); };
 
+  void Tick(float delta);
+
 private:
   Renderer *renderer;
 
